@@ -1,25 +1,89 @@
 # P6-Full-Stack-reseau-dev
 
-## Front
+## 🔧 Frontend: Angular + TypeScript
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+- Angular CLI (strongly recommended)
+- TypeScript (with best practices: indentation, SOLID principles)
 
-Don't forget to install your node_modules before starting (`npm install`).
+### 📌 Key Technical Choices
 
-### Development server
+#### State Management
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Options: Services + RxJS (simple) vs. NgRx (complex, scalable)
+- Use `BehaviorSubject` in services for MVP simplicity unless your app has many interconnected components.
 
-### Build
+#### Routing Strategy
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Angular’s built-in router
+- Lazy-loading modules (optional)
 
-### Where to start
+#### Form Handling
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+- Prefer Reactive Forms for better control and validation handling
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+#### CSS Framework
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get rid of it.
+- Angular Material
 
-Good luck!
+#### Authentication Token Handling
+
+- HttpInterceptor to inject JWT into headers
+- Store token in localStorage or sessionStorage
+
+## 🖥️ Backend: Java + Spring
+
+- Spring Core (mandatory)
+- Spring Boot and other Spring modules
+
+### 📌 Key Technical Choices
+
+#### Architecture
+
+- Layered architecture: Controllers → Services → Repositories (standard)
+- DTOs and Mappers (MapStruct)
+
+#### Database
+
+- MySQL
+- MySQL / H2 for easier local setup and CI/CD testing.
+
+#### Security
+
+- Options: Spring Security with JWT
+- Encode with jjwt
+
+#### Data Access
+
+- Spring Data JPA with Hibernate
+- Constraints and validations (@NotNull, @Size, etc.)
+
+#### Error Handling
+
+- Global error handler with `@ControllerAdvice`
+
+## 🔐 Security Layer
+
+### Frontend:
+
+- Store token securely (e.g., HttpOnly cookie if going advanced)
+- Redirect to login on 401 errors
+
+### Backend
+
+- Filter and validate JWT in request headers
+- Protect endpoints with `@PreAuthorize` or configuration-based rules
+
+## 📦 Project Structure
+
+- Frontend:
+  - /components, /services, /models, /guards, /pages
+- Backend:
+  - com.mdd.app.controller, ...service, ...repository, ...model, ...security, ...dto
+
+## ✅ Final Evaluation Checkpoints
+
+- All required features (register/login, themes, posts, comments, profile)
+- Code follows best practices (indentation, SOLID, Javadoc)
+- Frontend and backend are well integrated via API
+- Your documentation matches the implementation
+- GitHub repo is complete and link is shared
