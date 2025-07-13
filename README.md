@@ -5,6 +5,26 @@
 - Angular CLI (strongly recommended)
 - TypeScript (with best practices: indentation, SOLID principles)
 
+### Folder Architecture:
+
+```
+src/
+└── app/
+    ├── core/               # ✅ singleton services, interceptors, guards
+    ├── shared/             # ✅ reusable UI components, pipes, directives
+    ├── pages/              # ✅ routed feature modules
+    │   ├── home/
+    │   │   ├── home.component.ts
+    │   │   ├── home.component.html
+    │   │   ├── home.component.scss
+    │   │   └── home.module.ts   # 🔄 RECOMMENDED: lazy-loadable feature module
+    │   └── auth/               # 👈 later: login, register, forgot-password
+    │   └── profile/            # 👈 later: user profile page, etc.
+    ├── app.component.ts        # root shell
+    ├── app-routing.module.ts   # lazy loading
+    └── app.module.ts           # import core/shared only here
+```
+
 ### 📌 Key Technical Choices
 
 #### State Management
