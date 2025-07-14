@@ -1,0 +1,47 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+
+// Your custom purple
+$primary-color: #7451eb;
+
+// Define a palette using your color as the base (500)
+$custom-primary: mat.define-palette(
+  (
+    50: #f3f1fb,
+    100: #dcd6f3,
+    200: #c2b8eb,
+    300: #a899e3,
+    400: #9281dc,
+    500: $primary-color,
+    600: #6f5bbe,
+    700: #6351b1,
+    800: #5747a5,
+    900: #423596,
+    A100: #f0ecff,
+    A200: #c7baff,
+    A400: #9e88ff,
+    A700: #876eff,
+    contrast: (
+      500: white,
+      600: white,
+      700: white,
+      800: white,
+      900: white,
+    ),
+  )
+);
+
+// Create the full theme
+$custom-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $custom-primary,
+      accent: mat.define-palette(mat.$pink-palette),
+      warn: mat.define-palette(mat.$red-palette),
+    ),
+  )
+);
+
+// Apply the theme
+@include mat.core();
+@include mat.all-component-themes($custom-theme);
