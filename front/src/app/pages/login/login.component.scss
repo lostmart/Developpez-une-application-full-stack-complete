@@ -1,3 +1,5 @@
+$breakpoint-md: 768px;
+
 .login-container {
   max-width: 400px;
   margin: 0 auto;
@@ -6,6 +8,9 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  @media (min-width: $breakpoint-md) {
+    max-width: 100%;
+  }
 }
 
 .login-header {
@@ -14,8 +19,18 @@
   align-items: center;
   padding-bottom: 1rem;
 
+  @media (min-width: $breakpoint-md) {
+    border-bottom: 1px solid black;
+    height: 90px;
+  }
+
   .logo {
-    height: 40px;
+    display: none;
+
+    @media (min-width: $breakpoint-md) {
+      display: block;
+      height: 40px;
+    }
   }
 }
 
