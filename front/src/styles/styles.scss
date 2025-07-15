@@ -18,6 +18,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
