@@ -1,33 +1,29 @@
 $breakpoint-md: 768px;
 
 .login-header {
-  background-color: red;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 1rem;
+
+  .icon-button {
+    width: 140px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: $breakpoint-md) {
+    border-bottom: 1px solid black;
+    height: 90px;
+  }
 }
 
-// .login-header {
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   padding-bottom: 1rem;
+.logo {
+  display: none;
 
-//   .icon-button {
-//     width: 140px;
-
-//     img {
-//       width: 100%;
-//     }
-//   }
-
-//   @media (min-width: $breakpoint-md) {
-//     border-bottom: 1px solid black;
-//     height: 90px;
-//   }
-// }
-
-// .logo {
-//   display: none;
-
-//   @media (min-width: $breakpoint-md) {
-//     display: block;
-//   }
-// }
+  @media (min-width: $breakpoint-md) {
+    display: block;
+  }
+}
