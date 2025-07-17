@@ -4,22 +4,38 @@ $breakpoint-md: 768px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
-  padding: 1rem;
   box-sizing: border-box;
+  justify-content: start;
+  padding-top: 4em;
 
-  & .logo {
+  @media (min-width: $breakpoint-md) {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .logo-main {
+    display: block;
     width: 100%;
-    max-width: 412px;
+    max-width: 225px;
+    margin-bottom: 4em;
+
+    @media (min-width: $breakpoint-md) {
+      max-width: 412px;
+      margin-bottom: 2em;
+    }
   }
 
   & .buttons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     width: 100%;
+
+    @media (min-width: $breakpoint-md) {
+      gap: 1rem;
+    }
 
     button {
       width: 135px;

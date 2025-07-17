@@ -4,6 +4,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 @import "./_theme.scss";
+
+$breakpoint-md: 768px;
 * {
   box-sizing: border-box;
   margin: 0;
@@ -33,4 +35,14 @@ img {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+.logo-main {
+  display: block;
+  width: 100%;
+  max-width: 225px;
+
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
 }
