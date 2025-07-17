@@ -107,3 +107,7 @@ src/
 - Frontend and backend are well integrated via API
 - Your documentation matches the implementation
 - GitHub repo is complete and link is shared
+
+## UML
+
+![MDD diagram](/Monde-de-Dev-diagram.jpg)
