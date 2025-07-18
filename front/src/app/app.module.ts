@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from './shared/shared.module';
+import { ArticlesComponent } from './pages/articles/articles.component';
+
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,7 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    
+    ArticlesComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { SharedModule } from './shared/shared.module';
     MatFormFieldModule,
     MatIconModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

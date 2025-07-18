@@ -1,0 +1,33 @@
+<div class="articles-page">
+  <!-- Header -->
+  <header class="articles-header">
+    <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
+    <nav class="nav-links">
+      <a class="logout">Se déconnecter</a>
+      <a class="active">Articles</a>
+      <a class="themes-link">Thèmes</a>
+      <button mat-icon-button class="avatar-btn">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Articles Grid -->
+  <div class="articles-grid">
+    <mat-card class="article-card" *ngFor="let article of articles">
+      <h3>Titre du thème</h3>
+      <p class="description">
+        Description: lorem ipsum is simply dummy text of the printing and
+        typesetting industry. Lorem Ipsum has been the industry's standard...
+      </p>
+      <button
+        mat-flat-button
+        [color]="article.subscribed ? undefined : 'primary'"
+        [disabled]="article.subscribed"
+        class="subscribe-btn"
+      >
+        {{ article.subscribed ? "Déjà abonné" : "S’abonner" }}
+      </button>
+    </mat-card>
+  </div>
+</div>
