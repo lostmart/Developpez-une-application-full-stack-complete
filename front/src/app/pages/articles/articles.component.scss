@@ -1,3 +1,5 @@
+$breakpoint-md: 768px;
+
 .articles-page {
   padding: 1rem;
 }
@@ -44,8 +46,12 @@
 
 .articles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .article-card {

@@ -4,12 +4,42 @@ $breakpoint-md: 768px;
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   .icon-button {
     width: 140px;
 
     img {
       width: 100%;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+      text-decoration: none;
+      color: #000;
+
+      &.logout {
+        color: red;
+        font-weight: bold;
+      }
+
+      &.active {
+        font-weight: bold;
+        text-decoration: underline;
+      }
+
+      &.themes-link {
+        color: #7763c5;
+      }
+    }
+
+    .avatar-btn {
+      margin-left: 1rem;
     }
   }
 
