@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CardListComponent implements OnInit {
   @Input() articles: any[] = []; // TO DO: ❗ CHANGE any
+  @Input() topics: any[] = []; // TO DO: ❗ CHANGE any
 
   constructor() {}
 

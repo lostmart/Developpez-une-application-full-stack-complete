@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardComponent implements OnInit {
 
    @Input() article: any; // you can strongly type this later
+   @Input() topic: any; // you can strongly type this later
 
   constructor() { }
 

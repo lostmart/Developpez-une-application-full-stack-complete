@@ -15,6 +15,8 @@ import { SharedModule } from './shared/shared.module';
 import { ArticlesComponent } from './pages/articles/articles.component';
 
 import { MatCardModule } from '@angular/material/card';
+import { TopicsComponent } from './pages/topics/topics.component';
+import { SingleArticleComponent } from './pages/single-article/single-article.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     LoginComponent,
     ArticlesComponent,
+    TopicsComponent,
+    SingleArticleComponent,
   ],
   imports: [
     BrowserModule,
