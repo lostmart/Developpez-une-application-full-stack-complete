@@ -17,6 +17,7 @@ import { ArticlesComponent } from './pages/articles/articles.component';
 import { MatCardModule } from '@angular/material/card';
 import { TopicsComponent } from './pages/topics/topics.component';
 import { SingleArticleComponent } from './pages/single-article/single-article.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { SingleArticleComponent } from './pages/single-article/single-article.co
     ArticlesComponent,
     TopicsComponent,
     SingleArticleComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

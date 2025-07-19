@@ -1,0 +1,15 @@
+.comment-container {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  h3 {
+    font-size: 20px;
+  }
+  p {
+    background-color: #eeee;
+    padding: 1em;
+    border-radius: 1em;
+  }
+}

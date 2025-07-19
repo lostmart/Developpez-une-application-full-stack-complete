@@ -3,4 +3,5 @@ export interface Topic {
   title: string;
   description: string;
   subscribed: boolean;
+
 }

@@ -7,9 +7,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from './components/card/card.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
-  declarations: [HeaderComponent, CardListComponent, CardComponent],
+  declarations: [
+    HeaderComponent,
+    CardListComponent,
+    CardComponent,
+    CommentComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -24,6 +30,7 @@ import { CardComponent } from './components/card/card.component';
     MatIconModule,
     MatButtonModule,
     RouterModule,
+    CommentComponent,
   ],
 })
 export class SharedModule {}

@@ -1,0 +1,22 @@
+.not-found-page {
+  min-height: 70dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  text-align: center;
+
+  h2 {
+    font-size: 5em;
+    margin-bottom: 0.5em;
+  }
+
+  a {
+    text-decoration: none;
+    background-color: #7451eb;
+    padding: 1em;
+    color: white;
+    margin-top: 1em;
+  }
+}
