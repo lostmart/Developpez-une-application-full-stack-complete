@@ -1,0 +1,12 @@
+$breakpoint-md: 768px;
+
+.articles-container {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0.5em;
+
+  @media (min-width: $breakpoint-md) {
+  }
+}

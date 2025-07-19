@@ -1,1 +1,15 @@
-<p>card works!</p>
+<mat-card class="article-card">
+  <h3>Titre du thème</h3>
+  <p class="description">
+    Description: lorem ipsum is simply dummy text of the printing and
+    typesetting industry. Lorem Ipsum has been the industry's standard...
+  </p>
+  <button
+    mat-flat-button
+    [color]="article.subscribed ? undefined : 'primary'"
+    [disabled]="article.subscribed"
+    class="subscribe-btn"
+  >
+    {{ article.subscribed ? "Déjà abonné" : "S’abonner" }}
+  </button>
+</mat-card>
