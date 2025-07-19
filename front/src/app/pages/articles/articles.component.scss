@@ -61,6 +61,16 @@ $breakpoint-md: 768px;
   max-width: 480px;
   background-color: #f5f5f5;
 
+  h3 {
+    font-weight: bold;
+  }
+
+  button {
+    max-width: 200px;
+    margin: auto;
+    display: ;
+  }
+
   @media (min-width: $breakpoint-md) {
     width: 46%;
     max-width: 400px;
