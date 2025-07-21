@@ -1,4 +1,4 @@
-# P6-Full-Stack-reseau-dev
+# Full-Stack: MDD (Monde de Dév)
 
 ## 🔧 Frontend: Angular + TypeScript
 

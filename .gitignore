@@ -1,0 +1,31 @@
+# Ignore .env file (good)
+.env
+
+# Node (Angular frontend)
+front/node_modules/
+front/dist/
+front/.angular/cache/
+front/.angular/
+
+# IDE & editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Maven / Java (backend)
+back/target/
+back/.mvn/
+*.iml
+
+# Optional: ignore backup or temp files
+*.bak
+*.tmp
+*.~*
