@@ -100,6 +100,13 @@ src/
 - Backend:
   - com.mdd.app.controller, ...service, ...repository, ...model, ...security, ...dto
 
+## Endpoints
+
+### Users:
+
+- http://localhost:8080/api/users/register POST: register new user
+- http://localhost:8080/api/users/login POST: login registered user
+
 ## ✅ Final Evaluation Checkpoints
 
 - All required features (register/login, themes, posts, comments, profile)
