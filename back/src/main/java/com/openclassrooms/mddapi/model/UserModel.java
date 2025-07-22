@@ -16,16 +16,17 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String username;
+
     @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
     private String password;
 
-    // Other fields, getters, setters...
+    @Column(nullable = true)
+    private String picture;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
