@@ -24,6 +24,9 @@ public class MddApiApplication {
 		System.setProperty("DB_USER", dotenv.get("DB_USER"));
 		System.setProperty("DB_PASS", dotenv.get("DB_PASS"));
 
+		// JWT
+		System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
+
 		SpringApplication.run(MddApiApplication.class, args);
 	}
 }

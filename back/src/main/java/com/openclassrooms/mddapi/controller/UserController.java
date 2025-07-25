@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.JwtAuthenticationResponse;
+import com.openclassrooms.mddapi.dto.LoginRequest;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.service.UserService;
 
@@ -32,8 +34,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser() {
-        return userService.loginUser();
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            String token = userService.loginUser(
+                    loginRequest.getEmail(),
+                    loginRequest.getPassword());
+            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Invalid credentials");
+        }
     }
 
 }

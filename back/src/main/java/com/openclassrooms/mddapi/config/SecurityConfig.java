@@ -2,6 +2,8 @@ package com.openclassrooms.mddapi.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -9,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 import java.util.Arrays;
 
 @Configuration
@@ -17,23 +18,19 @@ import java.util.Arrays;
 public class SecurityConfig {
 
     @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .cors().and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                // Public endpoints
-                .antMatchers(
-                        "/",
-                        "/api/users/register", // Full path to match your controller
-                        "/api/users/login", // Full path to match your controller
-                        "/error", // For error handling
-                        "/favicon.ico" // Often requested automatically
-                ).permitAll()
-                // All other endpoints require authentication
-                .anyRequest().authenticated();
+        http.mvcMatcher("/api/**")
+                .authorizeHttpRequests(auth -> auth
+                        .mvcMatchers("/api/users/register", "/api/users/login", "/error", "/favicon.ico").permitAll()
+                        .anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
         return http.build();
     }
