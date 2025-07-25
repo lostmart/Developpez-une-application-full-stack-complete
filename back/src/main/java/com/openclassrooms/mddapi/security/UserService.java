@@ -10,17 +10,22 @@ import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.repo.UserRepo;
 
-@Service
+@Service("securityUserService")
 public class UserService {
 
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
 
-    // Constructor injection
     public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
+
+    // // Constructor injection
+    // public UserService(UserRepo userRepo, PasswordEncoder passwordEncoder) {
+    // this.userRepo = userRepo;
+    // this.passwordEncoder = passwordEncoder;
+    // }
 
     public UserModel createUser(UserModel user) {
         if (userRepo.existsByEmail(user.getEmail())) {
