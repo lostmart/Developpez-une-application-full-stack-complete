@@ -10,7 +10,7 @@ import com.openclassrooms.mddapi.exception.EmailAlreadyExistsException;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.repo.UserRepo;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
-import com.openclassrooms.mddapi.security.UserPrincipal;
+
 
 @Service
 public class UserService {
