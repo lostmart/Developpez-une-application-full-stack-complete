@@ -1,0 +1,38 @@
+package com.openclassrooms.mddapi.model;
+
+import java.util.Date;
+
+import javax.persistence.*;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "comments")
+
+public class CommentModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    private UserModel author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id", nullable = false)
+    private PostModel post;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
+
+}
