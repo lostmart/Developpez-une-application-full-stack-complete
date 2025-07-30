@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.AuthorDTO;
 import com.openclassrooms.mddapi.dto.PostCreateRequest;
+import com.openclassrooms.mddapi.dto.PostResponseDTO;
 import com.openclassrooms.mddapi.model.PostModel;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.repo.PostRepo;
@@ -46,7 +48,19 @@ public class PostService {
         post.setTitle(dto.title);
         post.setContent(dto.content);
         post.setTopic(dto.topic);
-        post.setAuthor(author); // ✅ Properly attached managed entity
+        post.setAuthor(author);
         return postRepo.save(post);
+    }
+
+    public PostResponseDTO mapPostToDTO(PostModel post) {
+        PostResponseDTO dto = new PostResponseDTO();
+        dto.setId(post.getId());
+        dto.setTitle(post.getTitle());
+        dto.setContent(post.getContent());
+        dto.setAuthor(new AuthorDTO(post.getAuthor().getId()));
+        dto.setTopic(post.getTopic());
+        dto.setCreatedAt(post.getCreatedAt());
+        dto.setUpdatedAt(post.getUpdatedAt());
+        return dto;
     }
 }
