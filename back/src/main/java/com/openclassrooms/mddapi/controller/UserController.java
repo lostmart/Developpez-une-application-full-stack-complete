@@ -11,6 +11,7 @@ import com.openclassrooms.mddapi.dto.JwtAuthenticationResponse;
 import com.openclassrooms.mddapi.dto.LoginRequest;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.service.UserService;
+import com.openclassrooms.mddapi.dto.AuthResult;
 
 /**
  * Controller that handles authentication and user account operations.
@@ -36,10 +37,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         try {
-            String token = userService.loginUser(
+            AuthResult authResult = userService.loginUser(
                     loginRequest.getEmail(),
                     loginRequest.getPassword());
-            return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+            return ResponseEntity.ok(
+                    new JwtAuthenticationResponse(authResult.getToken(), authResult.getUserId()));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Invalid credentials");
         }
