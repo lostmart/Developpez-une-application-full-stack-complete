@@ -7,6 +7,7 @@ import com.openclassrooms.mddapi.model.PostModel;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.repo.PostRepo;
 import com.openclassrooms.mddapi.repo.UserRepo;
+import com.openclassrooms.mddapi.security.AuthUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,23 +33,26 @@ public class PostService {
         return postRepo.findById(id);
     }
 
-    public PostModel createPost(PostModel post) {
-        return postRepo.save(post);
-    }
+    // public PostModel createPost(PostModel post) {
+    // return postRepo.save(post);
+    // }
 
     public void deletePost(Long id) {
         postRepo.deleteById(id);
     }
 
     public PostModel createPost(PostCreateRequest dto) {
-        UserModel author = userRepo.findById(dto.authorId)
-                .orElseThrow(() -> new RuntimeException("Author not found"));
+        Long authenticatedUserId = AuthUtils.getCurrentUserId(); // ✅ Get from token
+
+        UserModel author = userRepo.findById(authenticatedUserId)
+                .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
 
         PostModel post = new PostModel();
         post.setTitle(dto.title);
         post.setContent(dto.content);
         post.setTopic(dto.topic);
-        post.setAuthor(author);
+        post.setAuthor(author); // ✅ Set from token-based user
+
         return postRepo.save(post);
     }
 

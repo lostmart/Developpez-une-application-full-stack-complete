@@ -16,4 +16,7 @@ public class TopicModel {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(nullable = false)
+    private Long creator_id;
+
 }

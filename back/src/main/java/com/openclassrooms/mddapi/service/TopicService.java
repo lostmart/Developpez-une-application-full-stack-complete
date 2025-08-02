@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.openclassrooms.mddapi.model.TopicModel;
 import com.openclassrooms.mddapi.repo.TopicRepo;
+import com.openclassrooms.mddapi.security.AuthUtils;
 
 @Service
 public class TopicService {
@@ -35,13 +36,24 @@ public class TopicService {
         if (topic == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic cannot be null");
         }
+
         if (topic.getName() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic name cannot be null");
         }
-        // Check if topic already exists
+
+        // ✅ Get the authenticated user ID from the token
+        Long authenticatedUserId = AuthUtils.getCurrentUserId();
+
+        // ✅ Never trust the body-provided creator_id
+        topic.setCreator_id(authenticatedUserId);
+
+        // ❌ Remove this check — no longer needed:
+        // if (topic.getCreator_id() == null) ...
+
         if (topicRepo.findByName(topic.getName()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic already exists");
         }
+
         return topicRepo.save(topic);
     }
 }
