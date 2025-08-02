@@ -28,4 +28,9 @@ public class TopicController {
         return topicService.getTopicById(id);
     }
 
+    @PostMapping
+    public TopicModel createTopic(@RequestBody TopicModel topic) {
+        return topicService.createTopic(topic);
+    }
+
 }

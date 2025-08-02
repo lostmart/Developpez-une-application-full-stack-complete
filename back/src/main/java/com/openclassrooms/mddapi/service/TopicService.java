@@ -30,4 +30,18 @@ public class TopicService {
         return topicRepo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found"));
     }
+
+    public TopicModel createTopic(TopicModel topic) {
+        if (topic == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic cannot be null");
+        }
+        if (topic.getName() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic name cannot be null");
+        }
+        // Check if topic already exists
+        if (topicRepo.findByName(topic.getName()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topic already exists");
+        }
+        return topicRepo.save(topic);
+    }
 }
