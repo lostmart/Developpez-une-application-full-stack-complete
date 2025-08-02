@@ -23,4 +23,9 @@ public class TopicController {
         return topicService.getAllTopics();
     }
 
+    @GetMapping("/{id}")
+    public TopicModel getTopicById(@PathVariable Long id) {
+        return topicService.getTopicById(id);
+    }
+
 }
