@@ -1,22 +1,69 @@
 package com.openclassrooms.mddapi.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.transaction.Transactional;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.openclassrooms.mddapi.model.SubscriptionModel;
+import com.openclassrooms.mddapi.model.TopicModel;
 import com.openclassrooms.mddapi.repo.SubscriptionRepo;
+import com.openclassrooms.mddapi.repo.TopicRepo;
 
 @Service
 public class SubscriptionService {
 
     private final SubscriptionRepo subscriptionRepo;
 
-    public SubscriptionService(SubscriptionRepo subscriptionRepo) {
+    private final TopicRepo topicRepo;
+
+    public SubscriptionService(SubscriptionRepo subscriptionRepo, TopicRepo topicRepo) {
         this.subscriptionRepo = subscriptionRepo;
+        this.topicRepo = topicRepo;
     }
 
     public List<SubscriptionModel> getAllSubscriptions() {
         return subscriptionRepo.findAll();
     }
+
+    public List<SubscriptionModel> getSubscriptionsByUserId(Long userId) {
+        return subscriptionRepo.findByUserId(userId);
+    }
+
+    public SubscriptionModel saveSubscription(SubscriptionModel subscription) {
+        return subscriptionRepo.save(subscription);
+    }
+
+    @Transactional
+    public SubscriptionModel subscribeToTopic(Long userId, Long topicId) {
+
+        // Optionally get topic name from topic ID (if you have a Topic table)
+        Optional<TopicModel> topicOpt = topicRepo.findById(topicId);
+        if (topicOpt.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found");
+        }
+        String topicName = topicOpt.get().getName();
+
+        // check user exists
+        if (userId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User ID cannot be null");
+        }
+
+        // Check if already subscribed
+        SubscriptionModel existing = subscriptionRepo.findByUserIdAndTopicName(userId, topicName);
+        if (existing != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Already subscribed to this topic");
+        }
+
+        SubscriptionModel sub = new SubscriptionModel();
+        sub.setUserId(userId);
+        sub.setTopicName(topicName);
+
+        return subscriptionRepo.save(sub);
+    }
+
 }
