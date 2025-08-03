@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-
+import com.openclassrooms.mddapi.repo.UserRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,13 +17,16 @@ import com.openclassrooms.mddapi.repo.TopicRepo;
 @Service
 public class SubscriptionService {
 
+    private final UserRepo userRepo;
+
     private final SubscriptionRepo subscriptionRepo;
 
     private final TopicRepo topicRepo;
 
-    public SubscriptionService(SubscriptionRepo subscriptionRepo, TopicRepo topicRepo) {
+    public SubscriptionService(SubscriptionRepo subscriptionRepo, TopicRepo topicRepo, UserRepo userRepo) {
         this.subscriptionRepo = subscriptionRepo;
         this.topicRepo = topicRepo;
+        this.userRepo = userRepo;
     }
 
     public List<SubscriptionModel> getAllSubscriptions() {
@@ -31,6 +34,10 @@ public class SubscriptionService {
     }
 
     public List<SubscriptionModel> getSubscriptionsByUserId(Long userId) {
+        if (!userRepo.existsById(userId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        }
+
         return subscriptionRepo.findByUserId(userId);
     }
 
