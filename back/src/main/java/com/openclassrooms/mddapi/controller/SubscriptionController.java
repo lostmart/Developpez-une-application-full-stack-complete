@@ -1,10 +1,13 @@
 package com.openclassrooms.mddapi.controller;
 
+import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.model.SubscriptionModel;
 import com.openclassrooms.mddapi.service.SubscriptionService;
 
 /*
@@ -25,7 +28,7 @@ public class SubscriptionController {
     }
 
     @GetMapping
-    public String getSubscriptions() {
+    public List<SubscriptionModel> getSubscriptions() {
         return subscriptionService.getAllSubscriptions();
     }
 
