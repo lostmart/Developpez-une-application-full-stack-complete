@@ -63,4 +63,9 @@ public class PostController {
     // post.setId(id); // Ensure the correct ID is set
     // return postService.updatePost(post);
     // }
+
+    @GetMapping("/topic-name/{topicName}")
+    public ResponseEntity<List<PostDTO>> getPostsByTopicName(@PathVariable String topicName) {
+        return ResponseEntity.ok(postService.getPostsByTopicName(topicName));
+    }
 }
