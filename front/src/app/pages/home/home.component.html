@@ -2,19 +2,21 @@
   <img src="/assets/logo_p6.png" alt="logo" class="logo-main" />
   <h1 class="visually-hidden">Welcome to MDD</h1>
 
-  <!-- ✅ Backend status message -->
-  <div *ngIf="backendStatus === 'checking'" class="status checking">
-    Checking backend status...
-  </div>
-  <div *ngIf="backendStatus === 'online'" class="status online">
-    ✅ Backend is online.
-  </div>
-  <div *ngIf="backendStatus === 'offline'" class="status offline">
-    ❌ Backend is not reachable.
-  </div>
-
   <section class="buttons-container">
     <button mat-stroked-button [routerLink]="['/login']">Se connecter</button>
     <button mat-stroked-button [routerLink]="['/register']">S’inscrire</button>
+  </section>
+
+  <section class="status-container">
+    <!-- ✅ Backend status message -->
+    <div *ngIf="backendStatus === 'checking'" class="status checking">
+      Checking backend status...
+    </div>
+    <div *ngIf="backendStatus === 'online'" class="status online">
+      ✅ Backend is online.
+    </div>
+    <div *ngIf="backendStatus === 'offline'" class="status offline">
+      ❌ Backend is not reachable.
+    </div>
   </section>
 </div>

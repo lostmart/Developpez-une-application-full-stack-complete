@@ -7,22 +7,21 @@ import { ApiService } from 'src/app/shared/services/api.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  backendStatus: 'online' | 'offline' | 'checking' = 'checking';
+  backendStatus: 'online' | 'offline' | 'checking' | '' = 'checking';
 
   constructor(private api: ApiService) {}
 
+  // Simple test call to backend
   ngOnInit(): void {
     this.api.pingBackend().subscribe({
-      next: () => {
+      next: (res) => {
         this.backendStatus = 'online';
+        console.log('Backend responded:', res);
+        setTimeout(() => (this.backendStatus = ''), 1200);
       },
       error: () => {
         this.backendStatus = 'offline';
       },
     });
-  }
-
-  start() {
-    alert('Commencez par lire le README et à vous de jouer !');
   }
 }
