@@ -29,6 +29,13 @@ export class LoginComponent {
   }
 
   ngOnInit(): void {
+    // redirect if already logged in
+    if (this.auth.isLoggedIn()) {
+      this.router.navigate(['/topics']);
+      return;
+    }
+
+    // check backend
     this.api.pingBackend().subscribe({
       next: (res) => console.log('Backend responded:', res),
       error: (err) => console.error('Error contacting backend:', err),

@@ -7,9 +7,19 @@
     <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout">
       Se déconnecter
     </button>
-    <a [routerLink]="['/articles']" class="active">Articles</a>
-    <a class="themes-link" [routerLink]="['/topics']">Thèmes</a>
-    <button mat-icon-button class="avatar-btn">
+    <a
+      *ngIf="authService.isLoggedIn()"
+      [routerLink]="['/articles']"
+      class="active"
+      >Articles</a
+    >
+    <a
+      *ngIf="authService.isLoggedIn()"
+      class="themes-link"
+      [routerLink]="['/topics']"
+      >Thèmes</a
+    >
+    <button *ngIf="authService.isLoggedIn()" mat-icon-button class="avatar-btn">
       <mat-icon>account_circle</mat-icon>
     </button>
   </nav>
