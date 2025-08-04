@@ -19,14 +19,17 @@ $breakpoint-md: 768px;
     align-items: center;
     gap: 1.5rem;
 
+    & .logout {
+      color: red;
+      font-weight: bold;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
     a {
       text-decoration: none;
       color: #000;
-
-      &.logout {
-        color: red;
-        font-weight: bold;
-      }
 
       &.active {
         font-weight: bold;

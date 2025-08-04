@@ -4,7 +4,9 @@
   </a>
 
   <nav class="nav-links">
-    <a class="logout">Se déconnecter</a>
+    <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout">
+      Se déconnecter
+    </button>
     <a [routerLink]="['/articles']" class="active">Articles</a>
     <a class="themes-link" [routerLink]="['/topics']">Thèmes</a>
     <button mat-icon-button class="avatar-btn">

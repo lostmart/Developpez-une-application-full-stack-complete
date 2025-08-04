@@ -23,7 +23,11 @@ export class AuthService {
     return localStorage.getItem('auth_token');
   }
 
-  clearToken(): void {
+  logout(): void {
     localStorage.removeItem('auth_token');
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }
