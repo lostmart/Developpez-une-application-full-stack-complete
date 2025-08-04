@@ -19,6 +19,8 @@ import { TopicsComponent } from './pages/topics/topics.component';
 import { SingleArticleComponent } from './pages/single-article/single-article.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ReactiveFormsModule,
     SharedModule,
     MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

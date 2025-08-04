@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/shared/services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -6,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  backendStatus: 'online' | 'offline' | 'checking' = 'checking';
 
-  ngOnInit(): void {}
+  constructor(private api: ApiService) {}
+
+  ngOnInit(): void {
+    this.api.pingBackend().subscribe({
+      next: () => {
+        this.backendStatus = 'online';
+      },
+      error: () => {
+        this.backendStatus = 'offline';
+      },
+    });
+  }
 
   start() {
     alert('Commencez par lire le README et à vous de jouer !');

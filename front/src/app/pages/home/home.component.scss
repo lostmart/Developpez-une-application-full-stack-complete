@@ -9,6 +9,24 @@
   justify-content: start;
   padding-top: 4em;
 
+  .status {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+
+    &.online {
+      color: green;
+    }
+
+    &.offline {
+      color: red;
+    }
+
+    &.checking {
+      color: gray;
+    }
+  }
+
   @media (min-width: $breakpoint-md) {
     padding: 1rem;
     justify-content: center;
