@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,9 @@ export class LoginComponent {
     private fb: FormBuilder,
     private location: Location,
     private api: ApiService,
-    private auth: AuthService // ✅ Inject auth service
+    private auth: AuthService,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       identifier: ['', Validators.required],
@@ -34,18 +38,36 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const credentials = {
-        email: this.loginForm.value.identifier, // 👈 maps to backend `email`
+        email: this.loginForm.value.identifier,
         password: this.loginForm.value.password,
       };
 
       this.auth.login(credentials).subscribe({
         next: (res) => {
-          console.log('Login success:', res);
-          // TODO: Store token, navigate, etc.
+          if (res.accessToken) {
+            this.auth.storeToken(res.accessToken);
+            this.snackBar.open('Connexion réussie 🎉', 'Fermer', {
+              duration: 3000,
+              panelClass: 'snackbar-success',
+            });
+            setTimeout(() => this.router.navigate(['/topics']), 500);
+          } else {
+            this.snackBar.open('Réponse invalide du serveur.', 'Fermer', {
+              duration: 3000,
+              panelClass: 'snackbar-error',
+            });
+          }
         },
         error: (err) => {
-          console.error('Login failed:', err);
-          // TODO: show error in UI
+          console.error('Login error:', err);
+          this.snackBar.open(
+            'Identifiants incorrects ou erreur serveur ❌',
+            'Fermer',
+            {
+              duration: 3000,
+              panelClass: 'snackbar-error',
+            }
+          );
         },
       });
     }
