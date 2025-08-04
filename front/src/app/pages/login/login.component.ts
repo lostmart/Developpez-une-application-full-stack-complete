@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ApiService } from 'src/app/shared/services/api.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private location: Location,
-    private api: ApiService
+    private api: ApiService,
+    private auth: AuthService // ✅ Inject auth service
   ) {
     this.loginForm = this.fb.group({
       identifier: ['', Validators.required],
@@ -31,8 +33,21 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Login data:', this.loginForm.value);
-      // handle login logic
+      const credentials = {
+        email: this.loginForm.value.identifier, // 👈 maps to backend `email`
+        password: this.loginForm.value.password,
+      };
+
+      this.auth.login(credentials).subscribe({
+        next: (res) => {
+          console.log('Login success:', res);
+          // TODO: Store token, navigate, etc.
+        },
+        error: (err) => {
+          console.error('Login failed:', err);
+          // TODO: show error in UI
+        },
+      });
     }
   }
 
