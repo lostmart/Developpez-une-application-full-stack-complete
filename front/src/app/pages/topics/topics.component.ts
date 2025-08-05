@@ -11,6 +11,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 export class TopicsComponent implements OnInit {
   topics: Topic[] = [];
 
+
   constructor(private topicService: TopicService, private auth: AuthService) {}
 
   ngOnInit(): void {
