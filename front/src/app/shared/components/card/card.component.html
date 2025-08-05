@@ -8,8 +8,8 @@
   </mat-card>
 </a>
 <mat-card class="article-card" *ngIf="topic">
-  <h3>{{ topic.title }}</h3>
-  <p class="description">Description: this is the love ..</p>
+  <h3>{{ topic.name }}</h3>
+  <p class="description">{{ topic.description }}</p>
   <button
     mat-flat-button
     [color]="topic.subscribed ? undefined : 'primary'"
