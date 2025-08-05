@@ -1,7 +1,5 @@
 export interface Topic {
   id: number;
-  title: string;
-  description: string;
-  subscribed: boolean;
-
+  name: string;
+  creator_id: number;
 }
