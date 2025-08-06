@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Subscription } from '../models/subscription.model';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,5 +14,14 @@ export class SubscriptionService {
 
   getUserSubscriptions(userId: number): Observable<Subscription[]> {
     return this.http.get<Subscription[]>(`${this.apiUrl}/user/${userId}`);
+  }
+
+  subscribeToTopic(topicId: number): Observable<Subscription> {
+    console.log('running' + topicId);
+
+    return this.http.post<Subscription>(
+      `${this.apiUrl}/subscribe/${topicId}`,
+      {}
+    );
   }
 }

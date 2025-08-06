@@ -21,6 +21,20 @@ export class TopicsComponent implements OnInit {
     private subscriptionService: SubscriptionService
   ) {}
 
+  handleSubscribe(topicId: number): void {
+    this.subscriptionService.subscribeToTopic(topicId).subscribe({
+      next: () => {
+        const topic = this.topics.find((t) => t.id === topicId);
+        if (topic) {
+          topic.subscribed = true;
+        }
+      },
+      error: (err) => {
+        console.error('Failed to subscribe:', err);
+      },
+    });
+  }
+
   ngOnInit(): void {
     const token = this.auth.getToken();
     const userId = 11; // TODO: Replace with dynamic ID from AuthService if possible

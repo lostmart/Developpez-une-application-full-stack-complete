@@ -14,6 +14,7 @@
     mat-flat-button
     [color]="topic.subscribed ? undefined : 'primary'"
     [disabled]="topic.subscribed"
+    (click)="onSubscribeClick()"
     class="subscribe-btn"
   >
     {{ topic.subscribed ? "Déjà abonné" : "S’abonner" }}

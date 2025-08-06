@@ -1,18 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Topic } from '../../models/topic.model';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
+  @Input() article: any; // you can strongly type this later
+  @Input() topic!: Topic;
+  @Output() subscribe = new EventEmitter<number>();
 
-   @Input() article: any; // you can strongly type this later
-   @Input() topic: any; // you can strongly type this later
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onSubscribeClick() {
+    this.subscribe.emit(this.topic.id);
   }
 
+  ngOnInit(): void {}
 }

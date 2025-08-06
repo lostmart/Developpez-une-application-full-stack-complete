@@ -1,4 +1,7 @@
 <app-header></app-header>
 <section class="topics-page">
-  <app-card-list [topics]="topics"></app-card-list>
+  <app-card-list
+    [topics]="topics"
+    (subscribe)="handleSubscribe($event)"
+  ></app-card-list>
 </section>
