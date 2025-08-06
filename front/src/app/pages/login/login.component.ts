@@ -52,7 +52,7 @@ export class LoginComponent {
       this.auth.login(credentials).subscribe({
         next: (res) => {
           if (res.accessToken) {
-            this.auth.storeToken(res.accessToken);
+            this.auth.storeToken(res.accessToken, res.userId);
             this.snackBar.open('Connexion réussie 🎉', 'Fermer', {
               duration: 3000,
               panelClass: 'snackbar-success',

@@ -37,7 +37,8 @@ export class TopicsComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.auth.getToken();
-    const userId = 11; // TODO: Replace with dynamic ID from AuthService if possible
+    const userId =
+      this.auth.getUserId() || Number(localStorage.getItem('user_id'));
 
     if (!token) {
       console.warn('No token found. Redirecting to login...');

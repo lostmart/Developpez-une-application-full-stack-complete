@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 export interface Topic {
   id: number;
@@ -12,7 +13,7 @@ export interface Topic {
   providedIn: 'root',
 })
 export class TopicService {
-  private apiUrl = 'http://localhost:8080/api/topics';
+  private apiUrl = `${environment.apiUrl}topics`;
 
   constructor(private http: HttpClient) {}
 

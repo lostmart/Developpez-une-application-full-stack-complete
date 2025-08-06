@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Article } from 'src/app/shared/models/article.model';
+import { Subscription } from 'src/app/shared/models/subscription.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { PostService } from 'src/app/shared/services/post.service';
+import { SubscriptionService } from 'src/app/shared/services/subscription.service';
 
 @Component({
   selector: 'app-articles',
@@ -7,41 +11,29 @@ import { Article } from 'src/app/shared/models/article.model';
   styleUrls: ['./articles.component.scss'],
 })
 export class ArticlesComponent {
-  articles: Article[] = [
-    {
-      id: 1,
-      title: 'Title 1',
-      date: 'Date 1',
-      author: 'Author 1',
-      content: 'some content right here right now !!!',
-    },
-    {
-      id: 2,
-      title: 'Title 2',
-      date: 'Date 2',
-      author: 'Author 2',
-      content: 'some content right here right now !!!',
-    },
-    {
-      id: 3,
-      title: 'Title 3',
-      date: 'Date 3',
-      author: 'Author 3',
-      content: 'some content right here right now !!!',
-    },
-    {
-      id: 4,
-      title: 'Title 4',
-      date: 'Date 4',
-      author: 'Author 4',
-      content: 'some content right here right now !!!',
-    },
-    {
-      id: 5,
-      title: 'Title 5',
-      date: 'Date 5',
-      author: 'Author 5',
-      content: 'some content right here right now !!!',
-    },
-  ];
+  articles: Article[] = [];
+
+  constructor(
+    private postService: PostService,
+    private subscriptionService: SubscriptionService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    console.log('articles');
+    
+    const userId =
+      Number(localStorage.getItem('user_id')) ||
+      Number(this.authService.getUserId());
+
+    this.subscriptionService
+      .getUserSubscriptions(userId)
+      .subscribe((subs: Subscription[]) => {
+        this.postService
+          .getPostsFromSubscriptions(subs)
+          .subscribe((articles: Article[]) => {
+            this.articles = articles;
+          });
+      });
+  }
 }

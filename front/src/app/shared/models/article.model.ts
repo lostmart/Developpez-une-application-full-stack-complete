@@ -4,7 +4,7 @@ export interface Article {
   id: number;
   title: string;
   date: string;
-  author: string;
+  author_id: number;
   content: string;
   topic?: Topic[];
 }
