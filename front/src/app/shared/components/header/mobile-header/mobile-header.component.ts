@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
@@ -10,15 +10,27 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class MobileHeaderComponent {
   showMenu = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  @ViewChild('menuRef') menuRef!: ElementRef;
+
+  constructor(public authService: AuthService, private router: Router) {}
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
   }
 
   logout() {
-    this.auth.logout();
+    this.authService.logout();
     this.toggleMenu();
     this.router.navigate(['/login']);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const clickedInside = this.menuRef?.nativeElement.contains(event.target);
+    const clickedButton = (event.target as HTMLElement).closest('button');
+
+    if (!clickedInside && !clickedButton) {
+      this.showMenu = false;
+    }
   }
 }

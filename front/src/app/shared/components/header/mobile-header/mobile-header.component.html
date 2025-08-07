@@ -2,13 +2,25 @@
 <header class="mobile-header">
   <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
 
-  <nav *ngIf="showMenu" class="mobile-menu">
+  <nav
+    *ngIf="authService.isLoggedIn()"
+    #menuRef
+    [ngClass]="{ 'mobile-menu': true, show: showMenu }"
+  >
     <a [routerLink]="['/articles']" (click)="toggleMenu()">Articles</a>
     <a [routerLink]="['/topics']" (click)="toggleMenu()">Thèmes</a>
     <button (click)="logout()">Se déconnecter</button>
+
+    <button *ngIf="authService.isLoggedIn()" mat-icon-button class="avatar-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
   </nav>
 
-  <button mat-icon-button (click)="toggleMenu()">
+  <button
+    *ngIf="authService.isLoggedIn()"
+    mat-icon-button
+    (click)="toggleMenu()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
 </header>
