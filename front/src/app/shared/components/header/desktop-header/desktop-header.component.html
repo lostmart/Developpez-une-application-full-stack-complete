@@ -1,1 +1,25 @@
-<p>desktop-header works!</p>
+<header class="login-header">
+  <a class="icon-button" (click)="goBack()">
+    <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
+  </a>
+  <nav class="nav-links">
+    <button *ngIf="authService.isLoggedIn()" (click)="logout()" class="logout">
+      Se déconnecter
+    </button>
+    <a
+      *ngIf="authService.isLoggedIn()"
+      [routerLink]="['/articles']"
+      class="active"
+      >Articles</a
+    >
+    <a
+      *ngIf="authService.isLoggedIn()"
+      class="themes-link"
+      [routerLink]="['/topics']"
+      >Thèmes</a
+    >
+    <button *ngIf="authService.isLoggedIn()" mat-icon-button class="avatar-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </nav>
+</header>

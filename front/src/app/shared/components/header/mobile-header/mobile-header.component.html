@@ -1,9 +1,5 @@
 <!-- mobile-navbar.component.html -->
 <header class="mobile-header">
-  <button mat-icon-button (click)="toggleMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
-
   <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
 
   <nav *ngIf="showMenu" class="mobile-menu">
@@ -11,4 +7,8 @@
     <a [routerLink]="['/topics']" (click)="toggleMenu()">Thèmes</a>
     <button (click)="logout()">Se déconnecter</button>
   </nav>
+
+  <button mat-icon-button (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
 </header>
