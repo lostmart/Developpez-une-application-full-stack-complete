@@ -65,7 +65,8 @@ public class PostService {
         dto.setId(post.getId());
         dto.setTitle(post.getTitle());
         dto.setContent(post.getContent());
-        dto.setAuthor(new AuthorDTO(post.getAuthor().getId()));
+        AuthorDTO authorDTO = new AuthorDTO(post.getAuthor().getId(), post.getAuthor().getUsername());
+        dto.setAuthor(authorDTO);
         dto.setTopic(post.getTopic());
         dto.setCreatedAt(post.getCreatedAt());
         dto.setUpdatedAt(post.getUpdatedAt());

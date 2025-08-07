@@ -2,6 +2,9 @@
 
 a {
   text-decoration: none;
+  width: 25%;
+  display: block;
+  max-width: 360px;
 }
 
 .article-card {
@@ -9,6 +12,14 @@ a {
   width: 100%;
   max-width: 480px;
   background-color: #f5f5f5;
+  min-width: 360px;
+
+  .article-metaData {
+    margin-bottom: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 
   h3 {
     font-weight: bold;

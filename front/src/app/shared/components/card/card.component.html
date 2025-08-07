@@ -2,7 +2,8 @@
   <mat-card class="article-card" *ngIf="article">
     <h3>{{ article.title }}</h3>
     <div class="article-metaData">
-      Date: {{ article.date }} Auteur: {{ article.author }}
+      <span> Date: {{ article.createdAt | date : "d MMM, y" }} </span>
+      <span> Auteur: {{ article.author.userName }} </span>
     </div>
     <p class="description">Description: {{ article.content }}</p>
   </mat-card>
