@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { Router } from '@angular/router';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -9,20 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private location: Location,
-    public authService: AuthService,
-    private router: Router
-  ) {}
+  isMobile = false;
 
-  goBack(): void {
-    this.location.back();
+  constructor(private breakpointObserver: BreakpointObserver) {}
+
+  ngOnInit(): void {
+    this.breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isMobile = result.matches;
+      });
   }
-
-  logout(): void {
-    this.authService.logout(); // Clears token
-    this.router.navigate(['/']);
-  }
-
-  ngOnInit(): void {}
 }

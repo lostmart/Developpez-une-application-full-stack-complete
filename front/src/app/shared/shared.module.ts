@@ -8,6 +8,9 @@ import { CardListComponent } from './components/card-list/card-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from './components/card/card.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { DesktopHeaderComponent } from './components/header/desktop-header/desktop-header.component';
+import { MobileHeaderComponent } from './components/header/mobile-header/mobile-header.component';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +18,8 @@ import { CommentComponent } from './components/comment/comment.component';
     CardListComponent,
     CardComponent,
     CommentComponent,
+    DesktopHeaderComponent,
+    MobileHeaderComponent,
   ],
   imports: [
     CommonModule,
