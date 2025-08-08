@@ -1,6 +1,9 @@
 <app-header></app-header>
-<section class="articles-page">
+<section class="articles-page container">
+  <div>
+    <button mat-stroked-button [routerLink]="['/']">Créer un article</button>
+  </div>
+
   <!-- Articles Container -->
   <app-card-list [articles]="articles"></app-card-list>
-  
 </section>
