@@ -11,9 +11,14 @@
     <a [routerLink]="['/topics']" (click)="toggleMenu()">Thèmes</a>
     <button (click)="logout()">Se déconnecter</button>
 
-    <button *ngIf="authService.isLoggedIn()" mat-icon-button class="avatar-btn">
+    <a
+      [routerLink]="['/profile']"
+      *ngIf="authService.isLoggedIn()"
+      mat-icon-button
+      class="avatar-btn"
+    >
       <mat-icon>account_circle</mat-icon>
-    </button>
+    </a>
   </nav>
 
   <button

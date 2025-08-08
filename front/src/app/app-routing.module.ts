@@ -8,6 +8,7 @@ import { TopicsComponent } from './pages/topics/topics.component';
 import { SingleArticleComponent } from './pages/single-article/single-article.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'articles', component: ArticlesComponent },
   { path: 'articles/:id', component: SingleArticleComponent },
   { path: 'topics', component: TopicsComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 
   // Future routes can go here:
   // { path: 'login', component: LoginComponent },
