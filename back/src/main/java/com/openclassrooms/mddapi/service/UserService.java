@@ -11,6 +11,7 @@ import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.repo.UserRepo;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
 import com.openclassrooms.mddapi.dto.AuthResult;
+import com.openclassrooms.mddapi.dto.UserDTO;
 
 @Service
 public class UserService {
@@ -41,18 +42,6 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    // public String loginUser(String email, String password) {
-    // // Authenticate user
-    // Authentication authentication = authenticationManager.authenticate(
-    // new UsernamePasswordAuthenticationToken(email, password));
-
-    // // Set authentication in security context
-    // SecurityContextHolder.getContext().setAuthentication(authentication);
-
-    // // Generate JWT token
-    // return tokenProvider.generateToken(authentication);
-    // }
-
     public AuthResult loginUser(String email, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, password));
@@ -68,6 +57,12 @@ public class UserService {
         System.out.println("DEBUG - user email: " + user.getEmail());
 
         return new AuthResult(token, user.getId());
+    }
+
+    public UserDTO getUserById(Long userId) {
+        UserModel user = userRepo.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+    return new UserDTO(user);
     }
 
 }

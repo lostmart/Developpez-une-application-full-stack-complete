@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.mddapi.dto.JwtAuthenticationResponse;
 import com.openclassrooms.mddapi.dto.LoginRequest;
+import com.openclassrooms.mddapi.dto.UserDTO;
 import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.service.UserService;
 import com.openclassrooms.mddapi.dto.AuthResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Controller that handles authentication and user account operations.
@@ -45,6 +48,11 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Invalid credentials");
         }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 
 }
