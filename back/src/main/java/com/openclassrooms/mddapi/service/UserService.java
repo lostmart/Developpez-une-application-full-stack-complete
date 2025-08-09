@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +14,7 @@ import com.openclassrooms.mddapi.repo.UserRepo;
 import com.openclassrooms.mddapi.security.JwtTokenProvider;
 import com.openclassrooms.mddapi.dto.AuthResult;
 import com.openclassrooms.mddapi.dto.UserDTO;
+import com.openclassrooms.mddapi.dto.UserUpdateRequest;
 
 @Service
 public class UserService {
@@ -61,8 +64,48 @@ public class UserService {
 
     public UserDTO getUserById(Long userId) {
         UserModel user = userRepo.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-    return new UserDTO(user);
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return new UserDTO(user);
+    }
+
+    // update user
+
+    @Transactional
+    public UserDTO updateUser(Long userId, UserUpdateRequest req) {
+        UserModel user = userRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // username
+        if (req.getUsername() != null && !req.getUsername().isBlank()) {
+            user.setUsername(req.getUsername().trim());
+        }
+
+        // email (ensure it's unique if changing)
+        if (req.getEmail() != null && !req.getEmail().isBlank()) {
+            String newEmail = req.getEmail().trim();
+            boolean emailTaken = userRepo.existsByEmail(newEmail) && !newEmail.equalsIgnoreCase(user.getEmail());
+            if (emailTaken) {
+                throw new EmailAlreadyExistsException("This email is already taken");
+            }
+            user.setEmail(newEmail);
+        }
+
+        // picture
+        if (req.getPicture() != null && !req.getPicture().isBlank()) {
+            user.setPicture(req.getPicture().trim());
+        }
+
+        // password: require currentPassword to change it
+        if (req.getNewPassword() != null && !req.getNewPassword().isBlank()) {
+            if (req.getCurrentPassword() == null ||
+                    !passwordEncoder.matches(req.getCurrentPassword(), user.getPassword())) {
+                throw new RuntimeException("Current password is incorrect");
+            }
+            user.setPassword(passwordEncoder.encode(req.getNewPassword()));
+        }
+
+        UserModel saved = userRepo.save(user);
+        return new UserDTO(saved);
     }
 
 }
