@@ -9,6 +9,7 @@ import { Topic } from '../../models/topic.model';
 export class CardListComponent implements OnInit {
   @Input() articles: any[] = []; // TO DO: ❗ CHANGE any
   @Input() topics: Topic[] = [];
+  @Input() subscriptions: any[] = [];
 
   @Output() subscribe = new EventEmitter<number>();
 

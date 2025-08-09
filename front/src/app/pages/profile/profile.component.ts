@@ -14,9 +14,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  topics: Topic[] = [];
   profileForm: FormGroup;
   subscriptions: Subscription[] = [];
+  topics: Topic[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -89,9 +89,11 @@ export class ProfileComponent implements OnInit {
   handleSubscribe(topicId: number): void {
     this.subscriptionService.subscribeToTopic(topicId).subscribe({
       next: () => {
-        const topic = this.topics.find((t) => t.id === topicId);
-        if (topic) {
-          topic.subscribed = true;
+        const topic = this.subscriptions.find(
+          (t: Topic | Subscription) => t.id === topicId
+        );
+        if (topic!.subscribed) {
+          topic!.subscribed = true;
         }
       },
       error: (err) => {

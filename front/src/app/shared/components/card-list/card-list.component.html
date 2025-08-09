@@ -5,4 +5,8 @@
     [topic]="topic"
     (subscribe)="onSubscribe($event)"
   ></app-card>
+  <app-card
+    *ngFor="let subscription of subscriptions"
+    [subscription]="subscription"
+  ></app-card>
 </div>

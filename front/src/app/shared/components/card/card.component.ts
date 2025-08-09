@@ -9,6 +9,7 @@ import { Topic } from '../../models/topic.model';
 export class CardComponent implements OnInit {
   @Input() article: any; // you can strongly type this later
   @Input() topic!: Topic;
+  @Input() subscription!: Topic;
   @Output() subscribe = new EventEmitter<number>();
 
   constructor() {}
