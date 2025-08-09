@@ -22,16 +22,10 @@
   </button>
 </mat-card>
 
-<mat-card class="article-card" *ngIf="subscription">
-  <h3>{{ subscription.name }}</h3>
-  <p class="description">{{ subscription.description }}</p>
-  <button
-    mat-flat-button
-    [color]="topic.subscribed ? undefined : 'primary'"
-    [disabled]="topic.subscribed"
-    (click)="onSubscribeClick()"
-    class="subscribe-btn"
-  >
+<mat-card class="article-card" *ngIf="subscribedTopic">
+  <h3>{{ subscribedTopic.topicName }}</h3>
+  <p class="description">description ?</p>
+  <button mat-flat-button color="primary" (click)="onSubscribeClick()">
     Se désabonner
   </button>
 </mat-card>

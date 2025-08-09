@@ -15,15 +15,14 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  subscriptions: Subscription[] = [];
-  topics: Topic[] = [];
+  subscribedTopics: Subscription[] = [];
 
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
     private userService: UserService,
-    private subscriptionService: SubscriptionService,
-    public topicService: TopicService
+    public topicService: TopicService,
+    private subscriptionService: SubscriptionService
   ) {
     this.profileForm = this.fb.group({
       username: ['', Validators.required],
@@ -44,29 +43,31 @@ export class ProfileComponent implements OnInit {
       });
     });
 
-    this.topicService.getTopics(token!).subscribe({
-      next: (topicsData) => {
-        this.subscriptionService.getUserSubscriptions(userId).subscribe({
-          next: (subs) => {
-            this.subscriptions = subs;
-            const subscribedTopicNames = subs.map((s) => s.topicName);
+    // this.topicService.getTopics(token!).subscribe({
+    //   next: (topicsData) => {
+    //     const token = this.auth.getToken()?.toString();
 
-            this.topics = topicsData.map((topic) => ({
-              ...topic,
-              subscribed: subscribedTopicNames.includes(topic.name),
-            }));
-          },
-          error: (err) => {
-            console.error('Error fetching subscriptions', err);
-            this.topics = topicsData; // Fallback: show topics without subscription info
-          },
-        });
-      },
-      error: (err) => console.error('Failed to fetch topics:', err),
-    });
+    //     this.topicService.getTopics(token!).subscribe({
+    //       next: (sub) => {
+    //         this.subscribedTopics = sub;
+    //         const subscribedTopicNames = sub.map((s) => s.topicName);
+
+    //         // this.topics = topicsData.map((topic) => ({
+    //         //   ...topic,
+    //         //   subscribed: subscribedTopicNames.includes(topic.name),
+    //         // }));
+    //       },
+    //       error: (err) => {
+    //         console.error('Error fetching subscriptions', err);
+    //         // this.topics = topicsData; // Fallback: show topics without subscription info
+    //       },
+    //     });
+    //   },
+    //   error: (err) => console.error('Failed to fetch topics:', err),
+    // });
 
     this.subscriptionService.getUserSubscriptions(userId).subscribe((subs) => {
-      this.subscriptions = subs;
+      this.subscribedTopics = subs;
     });
   }
 
@@ -87,19 +88,19 @@ export class ProfileComponent implements OnInit {
   // }
 
   handleSubscribe(topicId: number): void {
-    this.subscriptionService.subscribeToTopic(topicId).subscribe({
-      next: () => {
-        const topic = this.subscriptions.find(
-          (t: Topic | Subscription) => t.id === topicId
-        );
-        if (topic!.subscribed) {
-          topic!.subscribed = true;
-        }
-      },
-      error: (err) => {
-        console.error('Failed to subscribe:', err);
-      },
-    });
+    // this.subscriptionService.subscribeToTopic(topicId).subscribe({
+    //   next: () => {
+    //     const topic = this.subscribedTopics.find(
+    //       (t: Topic | Subscription) => t.id === topicId
+    //     );
+    //     if (topic!.subscribed) {
+    //       topic!.subscribed = true;
+    //     }
+    //   },
+    //   error: (err) => {
+    //     console.error('Failed to subscribe:', err);
+    //   },
+    // });
   }
 
   // unsubscribe(topicId: number): void {

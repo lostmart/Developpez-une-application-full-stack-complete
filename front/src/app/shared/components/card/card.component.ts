@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Topic } from '../../models/topic.model';
+import { Subscription } from '../../models/subscription.model';
 
 @Component({
   selector: 'app-card',
@@ -9,7 +10,7 @@ import { Topic } from '../../models/topic.model';
 export class CardComponent implements OnInit {
   @Input() article: any; // you can strongly type this later
   @Input() topic!: Topic;
-  @Input() subscription!: Topic;
+  @Input() subscribedTopic!: Subscription;
   @Output() subscribe = new EventEmitter<number>();
 
   constructor() {}
