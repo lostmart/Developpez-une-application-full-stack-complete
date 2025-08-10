@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -22,5 +21,8 @@ public class SubscriptionModel {
     @Lob
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
+
+    @Column(name = "topic_id", nullable = false)
+    private Long topicId;
 
 }

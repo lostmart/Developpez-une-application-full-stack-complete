@@ -8,105 +8,68 @@ import { Topic } from 'src/app/shared/models/topic.model';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { map, Observable, switchMap } from 'rxjs';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  profileForm: FormGroup;
-  subscribedTopics: Subscription[] = [];
+  profileForm!: FormGroup;
+  subs$!: Observable<Subscription[]>; // set later
+  topics: Topic[] = [];
 
   constructor(
-    private fb: FormBuilder,
     private auth: AuthService,
-    private userService: UserService,
-    public topicService: TopicService,
-    private subscriptionService: SubscriptionService
-  ) {
-    this.profileForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: [''],
-    });
-  }
+    private topicService: TopicService,
+    private subscriptionService: SubscriptionService,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
-    const token = this.auth.getToken();
     const userId = Number(localStorage.getItem('user_id'));
+    const token = this.auth.getToken();
 
-    this.userService.getUserById(userId).subscribe((user: User) => {
-      console.log(user);
-      this.profileForm.patchValue({
-        username: user.username,
-        email: user.email,
-      });
+    // 1) Bind the UI stream once
+    this.subs$ = this.subscriptionService.subs$;
+
+    // 2) Trigger the fetch once
+    this.subscriptionService.loadUserSubscriptions(userId).subscribe({
+      error: () => {
+        // optional: show a toast if you’ve injected MatSnackBar
+        // this.snack.open('Failed to load subscriptions', 'Close', { duration: 3000 });
+      },
     });
 
-    // this.topicService.getTopics(token!).subscribe({
-    //   next: (topicsData) => {
-    //     const token = this.auth.getToken()?.toString();
-
-    //     this.topicService.getTopics(token!).subscribe({
-    //       next: (sub) => {
-    //         this.subscribedTopics = sub;
-    //         const subscribedTopicNames = sub.map((s) => s.topicName);
-
-    //         // this.topics = topicsData.map((topic) => ({
-    //         //   ...topic,
-    //         //   subscribed: subscribedTopicNames.includes(topic.name),
-    //         // }));
-    //       },
-    //       error: (err) => {
-    //         console.error('Error fetching subscriptions', err);
-    //         // this.topics = topicsData; // Fallback: show topics without subscription info
-    //       },
-    //     });
-    //   },
-    //   error: (err) => console.error('Failed to fetch topics:', err),
-    // });
-
-    this.subscriptionService.getUserSubscriptions(userId).subscribe((subs) => {
-      this.subscribedTopics = subs;
-    });
+    // 3) Your topics mapping stays the same
+    this.topicService
+      .getTopics(token!)
+      .pipe(
+        switchMap((topicsData) =>
+          this.subs$.pipe(
+            map((subs) => {
+              const subscribedNames = new Set(subs.map((s) => s.topicName));
+              return topicsData.map((t) => ({
+                ...t,
+                subscribed: subscribedNames.has(t.name),
+              }));
+            })
+          )
+        )
+      )
+      .subscribe((mapped) => (this.topics = mapped));
   }
 
   onSubmit() {
-    if (this.profileForm.valid) {
-      console.log('Form data:', this.profileForm.value);
-      // Call API or navigate
-    }
+    // Call API or navigate
   }
 
-  // saveProfile(): void {
-  //   if (this.profileForm.valid) {
-  //     const updatedUser = this.profileForm.value;
-  //     this.userService.updateUser(updatedUser).subscribe(() => {
-  //       alert('Profile updated successfully!');
-  //     });
-  //   }
-  // }
-
-  handleSubscribe(topicId: number): void {
-    // this.subscriptionService.subscribeToTopic(topicId).subscribe({
-    //   next: () => {
-    //     const topic = this.subscribedTopics.find(
-    //       (t: Topic | Subscription) => t.id === topicId
-    //     );
-    //     if (topic!.subscribed) {
-    //       topic!.subscribed = true;
-    //     }
-    //   },
-    //   error: (err) => {
-    //     console.error('Failed to subscribe:', err);
-    //   },
-    // });
+  onUnsubscribe(topicId: number): void {
+    this.subscriptionService.unsubscribeFromTopic(topicId).subscribe();
   }
 
-  // unsubscribe(topicId: number): void {
-  //   const userId = Number(localStorage.getItem('user_id'));
-  //   this.userService.unsubscribe(userId, topicId).subscribe(() => {
-  //     this.subscriptions = this.subscriptions.filter(sub => sub.topic.id !== topicId);
-  //   });
-  // }
+  trackBySubId = (_: number, s: Subscription) => s.id ?? s.topicId;
+
+  trackByTopicId = (_: number, t: Topic) => t.id;
 }

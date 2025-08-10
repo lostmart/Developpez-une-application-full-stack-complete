@@ -8,5 +8,6 @@
   <app-card
     *ngFor="let subscribedTopic of subscribedTopics"
     [subscribedTopic]="subscribedTopic"
+    (unsubscribe)="onUnsubscribeById(subscribedTopic.topicId!)"
   ></app-card>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'src/app/shared/models/subscription.model';
+import { map, Observable, switchMap } from 'rxjs';
+import { Subscription as AppSubscription } from 'src/app/shared/models/subscription.model';
 import { Topic } from 'src/app/shared/models/topic.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SubscriptionService } from 'src/app/shared/services/subscription.service';
@@ -12,8 +13,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 })
 export class TopicsComponent implements OnInit {
   topics: Topic[] = [];
-
-  subscriptions: Subscription[] = [];
+  subs$!: Observable<AppSubscription[]>; // from the service
 
   constructor(
     private topicService: TopicService,
@@ -21,54 +21,48 @@ export class TopicsComponent implements OnInit {
     private subscriptionService: SubscriptionService
   ) {}
 
+  ngOnInit(): void {
+    const token = this.auth.getToken();
+    const userId =
+      this.auth.getUserId() || Number(localStorage.getItem('user_id'));
+    if (!token) return;
+
+    // start the stream of user subscriptions
+    this.subscriptionService.loadUserSubscriptions(userId);
+    this.subs$ = this.subscriptionService.subs$;
+
+    // recompute `topics` whenever subs change
+    this.topicService
+      .getTopics(token)
+      .pipe(
+        switchMap((topicsData) =>
+          this.subs$.pipe(
+            map((subs) => {
+              const subscribedNames = new Set(subs.map((s) => s.topicName));
+              return topicsData.map((t) => ({
+                ...t,
+                subscribed: subscribedNames.has(t.name),
+              }));
+            })
+          )
+        )
+      )
+      .subscribe((mapped) => (this.topics = mapped));
+  }
+
   handleSubscribe(topicId: number): void {
     const topic = this.topics.find((t) => t.id === topicId);
-    if (!topic) {
-      console.error('Topic not found:', topicId);
-      return;
-    }
+    if (!topic) return;
 
     this.subscriptionService
       .subscribeToTopic(topicId, topic.description ?? '')
       .subscribe({
         next: () => {
-          topic.subscribed = true; // mark locally as subscribed
+          // no manual flip needed; subs$ updates -> topics recomputed
         },
-        error: (err) => {
-          console.error('Failed to subscribe:', err);
-        },
+        error: (err) => console.error('Failed to subscribe:', err),
       });
   }
 
-  ngOnInit(): void {
-    const token = this.auth.getToken();
-    const userId =
-      this.auth.getUserId() || Number(localStorage.getItem('user_id'));
-
-    if (!token) {
-      console.warn('No token found. Redirecting to login...');
-      return;
-    }
-
-    this.topicService.getTopics(token).subscribe({
-      next: (topicsData) => {
-        this.subscriptionService.getUserSubscriptions(userId).subscribe({
-          next: (subs) => {
-            this.subscriptions = subs;
-            const subscribedTopicNames = subs.map((s) => s.topicName);
-
-            this.topics = topicsData.map((topic) => ({
-              ...topic,
-              subscribed: subscribedTopicNames.includes(topic.name),
-            }));
-          },
-          error: (err) => {
-            console.error('Error fetching subscriptions', err);
-            this.topics = topicsData; // Fallback: show topics without subscription info
-          },
-        });
-      },
-      error: (err) => console.error('Failed to fetch topics:', err),
-    });
-  }
+  trackByTopicId = (_: number, t: Topic) => t.id;
 }

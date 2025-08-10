@@ -11,9 +11,13 @@ import { Article } from '../../models/article.model';
 export class CardListComponent implements OnInit {
   @Input() articles: Article[] = [];
   @Input() topics: Topic[] = [];
+  @Input() subTopics: Topic[] = [];
   @Input() subscribedTopics: Subscription[] = [];
 
   @Output() subscribe = new EventEmitter<number>();
+  @Output() unsubscribe = new EventEmitter<number>();
+
+  private topicNameToId = new Map<string, number>();
 
   constructor() {}
 
@@ -22,5 +26,20 @@ export class CardListComponent implements OnInit {
     this.subscribe.emit(topicId);
   }
 
-  ngOnInit(): void {}
+  private rebuildIndex() {
+    this.topicNameToId.clear();
+    for (const t of this.topics || []) {
+      if (t?.name) this.topicNameToId.set(t.name, t.id);
+    }
+  }
+
+  onUnsubscribeById(topicId: number) {
+    console.log('unsubscribesss', topicId);
+    if (topicId != null) this.unsubscribe.emit(topicId);
+    else console.warn('Topic not found for number', topicId);
+  }
+
+  ngOnInit(): void {
+    this.rebuildIndex();
+  }
 }

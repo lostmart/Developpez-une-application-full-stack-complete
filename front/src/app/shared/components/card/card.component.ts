@@ -12,11 +12,16 @@ export class CardComponent implements OnInit {
   @Input() topic!: Topic;
   @Input() subscribedTopic!: Subscription;
   @Output() subscribe = new EventEmitter<number>();
+  @Output() unsubscribe = new EventEmitter<number>();
 
   constructor() {}
 
   onSubscribeClick() {
     this.subscribe.emit(this.topic.id);
+  }
+
+  onUnsubscribeClick() {
+    if (this.subscribedTopic) this.unsubscribe.emit(this.subscribedTopic.id);
   }
 
   ngOnInit(): void {}

@@ -71,6 +71,7 @@ public class SubscriptionService {
         sub.setUserId(userId);
         sub.setTopicName(topicName);
         sub.setDescription(description);
+        sub.setTopicId(topicId);
 
         return subscriptionRepo.save(sub);
     }
