@@ -18,4 +18,7 @@ public class SubscriptionModel {
     @Column(name = "topic_name", nullable = false)
     private String topicName;
 
+    @Column(name = "description", nullable = false)
+    private String description;
+
 }

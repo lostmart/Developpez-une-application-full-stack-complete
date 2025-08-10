@@ -16,12 +16,14 @@ export class SubscriptionService {
     return this.http.get<Subscription[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  subscribeToTopic(topicId: number): Observable<Subscription> {
+  subscribeToTopic(
+    topicId: number,
+    description: string
+  ): Observable<Subscription> {
     console.log('running' + topicId);
 
-    return this.http.post<Subscription>(
-      `${this.apiUrl}/subscribe/${topicId}`,
-      {}
-    );
+    return this.http.post<Subscription>(`${this.apiUrl}/subscribe/${topicId}`, {
+      description,
+    });
   }
 }

@@ -3,4 +3,5 @@ export interface Subscription {
   userId: number;
   topicName: string;
   subscribed?: boolean;
+  description?: string;
 }

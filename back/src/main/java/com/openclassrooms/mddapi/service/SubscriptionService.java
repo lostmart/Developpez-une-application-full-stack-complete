@@ -46,9 +46,9 @@ public class SubscriptionService {
     }
 
     @Transactional
-    public SubscriptionModel subscribeToTopic(Long userId, Long topicId) {
+    public SubscriptionModel subscribeToTopic(Long userId, Long topicId, String description) {
 
-        // Optionally get topic name from topic ID (if you have a Topic table)
+        // get topic name
         Optional<TopicModel> topicOpt = topicRepo.findById(topicId);
         if (topicOpt.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found");
@@ -69,6 +69,7 @@ public class SubscriptionService {
         SubscriptionModel sub = new SubscriptionModel();
         sub.setUserId(userId);
         sub.setTopicName(topicName);
+        sub.setDescription(description);
 
         return subscriptionRepo.save(sub);
     }

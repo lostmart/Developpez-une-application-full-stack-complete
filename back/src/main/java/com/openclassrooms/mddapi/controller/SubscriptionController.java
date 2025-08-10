@@ -2,15 +2,16 @@ package com.openclassrooms.mddapi.controller;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.mddapi.dto.SubscribeRequest;
 import com.openclassrooms.mddapi.model.SubscriptionModel;
 import com.openclassrooms.mddapi.security.AuthUtils;
 import com.openclassrooms.mddapi.service.SubscriptionService;
@@ -45,9 +46,17 @@ public class SubscriptionController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping("/subscribe/{topicId}")
-    public ResponseEntity<?> subscribeToTopic(@PathVariable Long topicId, Authentication authentication) {
-        Long authenticatedUserId = AuthUtils.getCurrentUserId(); // ✅ Get from token
-        return ResponseEntity.ok(subscriptionService.subscribeToTopic(authenticatedUserId, topicId));
+    public ResponseEntity<?> subscribeToTopic(
+            @PathVariable Long topicId,
+            @RequestBody(required = false) SubscribeRequest request) {
+
+        Long userId = AuthUtils.getCurrentUserId();
+        String description = (request != null && request.getDescription() != null)
+                ? request.getDescription()
+                : "";
+
+        return ResponseEntity.ok(
+                subscriptionService.subscribeToTopic(userId, topicId, description));
     }
 
 }

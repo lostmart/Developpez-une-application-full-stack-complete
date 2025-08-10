@@ -22,17 +22,22 @@ export class TopicsComponent implements OnInit {
   ) {}
 
   handleSubscribe(topicId: number): void {
-    this.subscriptionService.subscribeToTopic(topicId).subscribe({
-      next: () => {
-        const topic = this.topics.find((t) => t.id === topicId);
-        if (topic) {
-          topic.subscribed = true;
-        }
-      },
-      error: (err) => {
-        console.error('Failed to subscribe:', err);
-      },
-    });
+    const topic = this.topics.find((t) => t.id === topicId);
+    if (!topic) {
+      console.error('Topic not found:', topicId);
+      return;
+    }
+
+    this.subscriptionService
+      .subscribeToTopic(topicId, topic.description ?? '')
+      .subscribe({
+        next: () => {
+          topic.subscribed = true; // mark locally as subscribed
+        },
+        error: (err) => {
+          console.error('Failed to subscribe:', err);
+        },
+      });
   }
 
   ngOnInit(): void {

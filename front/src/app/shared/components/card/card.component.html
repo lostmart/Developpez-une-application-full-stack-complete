@@ -24,7 +24,7 @@
 
 <mat-card class="article-card" *ngIf="subscribedTopic">
   <h3>{{ subscribedTopic.topicName }}</h3>
-  <p class="description">description ?</p>
+  <p class="description">{{ subscribedTopic.description }}</p>
   <button mat-flat-button color="primary" (click)="onSubscribeClick()">
     Se désabonner
   </button>
