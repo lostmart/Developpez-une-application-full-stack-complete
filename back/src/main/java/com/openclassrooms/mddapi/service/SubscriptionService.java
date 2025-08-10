@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 import com.openclassrooms.mddapi.repo.UserRepo;
 
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
