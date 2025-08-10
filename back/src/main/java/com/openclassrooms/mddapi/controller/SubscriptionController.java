@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,13 @@ public class SubscriptionController {
 
         return ResponseEntity.ok(
                 subscriptionService.subscribeToTopic(userId, topicId, description));
+    }
+
+    @DeleteMapping("/unsubscribe/{topicId}")
+    public ResponseEntity<?> unsubscribeFromTopic(@PathVariable Long topicId) {
+        Long userId = AuthUtils.getCurrentUserId();
+        boolean removed = subscriptionService.unsubscribe(userId, topicId);
+        return removed ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
 }

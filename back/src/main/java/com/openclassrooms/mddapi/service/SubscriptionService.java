@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 import com.openclassrooms.mddapi.repo.UserRepo;
+
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -72,6 +74,16 @@ public class SubscriptionService {
         sub.setDescription(description);
 
         return subscriptionRepo.save(sub);
+    }
+
+    @Transactional
+    public boolean unsubscribe(Long userId, Long topicId) {
+        String topicName = topicRepo.findById(topicId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Topic not found"))
+                .getName();
+
+        int deleted = subscriptionRepo.deleteByUserIdAndTopicName(userId, topicName);
+        return deleted > 0;
     }
 
 }
