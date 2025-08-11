@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PostService {
   private apiUrl = `${environment.apiUrl}posts/topic-name`;
+  private postUrl = `${environment.apiUrl}posts`;
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +40,6 @@ export class PostService {
     content: string;
     topic: string;
   }): Observable<Article> {
-    return this.http.post<Article>(this.apiUrl, payload);
+    return this.http.post<Article>(this.postUrl, payload);
   }
 }
