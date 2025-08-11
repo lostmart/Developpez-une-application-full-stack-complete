@@ -4,7 +4,15 @@
   <form [formGroup]="form" (ngSubmit)="submit()" class="form">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Sélectionner un thème</mat-label>
-      <input matInput formControlName="topic" required />
+      <mat-select formControlName="topic" required>
+        <mat-option value="" disabled>— Choisir —</mat-option>
+        <mat-option *ngFor="let t of topics" [value]="t.name">
+          {{ t.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('topic')?.hasError('required')">
+        Le thème est requis
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
