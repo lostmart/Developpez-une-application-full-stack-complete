@@ -7,9 +7,21 @@
     #menuRef
     [ngClass]="{ 'mobile-menu': true, show: showMenu }"
   >
-    <a [routerLink]="['/articles']" (click)="toggleMenu()">Articles</a>
-    <a [routerLink]="['/topics']" (click)="toggleMenu()">Thèmes</a>
     <button (click)="logout()">Se déconnecter</button>
+    <a
+      [routerLink]="['/articles']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="toggleMenu()"
+      >Articles</a
+    >
+    <a
+      [routerLink]="['/topics']"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="toggleMenu()"
+      >Thèmes</a
+    >
 
     <a
       [routerLink]="['/profile']"
@@ -17,7 +29,7 @@
       mat-icon-button
       class="avatar-btn"
     >
-      <mat-icon>account_circle</mat-icon>
+      <span class="material-symbols-outlined">person</span>
     </a>
   </nav>
 

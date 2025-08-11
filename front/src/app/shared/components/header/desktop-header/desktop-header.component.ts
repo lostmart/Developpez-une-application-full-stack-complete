@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
   styleUrls: ['./desktop-header.component.scss'],
 })
 export class DesktopHeaderComponent {
+  activeLink: string = '';
+
   constructor(
     private location: Location,
     public authService: AuthService,

@@ -1,5 +1,5 @@
 $primary-color: #7763c5;
-$logout-color: red;
+$logout-color: #a40f0f;
 $breakpoint-md: 768px;
 
 .mobile-header {
@@ -45,10 +45,17 @@ $breakpoint-md: 768px;
     }
 
     a {
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: black;
       text-decoration: none;
+      color: #000;
+      font-size: 20px;
+
+      &.themes-link {
+        color: inherit;
+      }
+
+      &.active {
+        color: $primary-color;
+      }
     }
 
     button {
@@ -64,4 +71,30 @@ $breakpoint-md: 768px;
   @media (min-width: $breakpoint-md) {
     display: none; // Hide on desktop
   }
+}
+
+.avatar-btn {
+  .material-symbols-outlined {
+    font-size: 36px;
+    color: rgb(0 0 0 / 54%);
+    background: #d9d9d9;
+    border-radius: 50%;
+    padding: 6px;
+
+    // optional hover effect
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  // active state (when link has "active" class)
+  &.active .material-symbols-outlined {
+    color: #7763c5; // your purple highlight
+  }
+}
+
+.mat-button-ripple {
+  background-color: red;
+  width: 50px;
+  height: 50px;
 }

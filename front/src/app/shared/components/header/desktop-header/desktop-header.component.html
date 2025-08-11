@@ -14,13 +14,16 @@
       <a
         *ngIf="authService.isLoggedIn()"
         [routerLink]="['/articles']"
-        class="active"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         >Articles</a
       >
       <a
         *ngIf="authService.isLoggedIn()"
         class="themes-link"
         [routerLink]="['/topics']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         >Thèmes</a
       >
       <a
@@ -29,7 +32,7 @@
         mat-icon-button
         class="avatar-btn"
       >
-        <mat-icon>account_circle</mat-icon>
+        <span class="material-symbols-outlined">person</span>
       </a>
     </nav>
   </header>
