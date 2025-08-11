@@ -38,6 +38,9 @@ $primary-color: #7763c5;
       &.themes-link {
         color: inherit;
       }
+      &.active {
+        color: $primary-color;
+      } // <-- put after .themes-link
     }
   }
 
