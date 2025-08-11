@@ -27,8 +27,21 @@
 
 <section class="subscribe-page container">
   <h2>Abonnements</h2>
-  <li *ngFor="let s of subs$ | async; trackBy: trackBySubId">
-    {{ s.topicName }}
-    <button (click)="onUnsubscribe(s.topicId!)">Unsubscribe</button>
-  </li>
+  <div class="subscribe-container">
+    <mat-card
+      class="subscribe-card"
+      *ngFor="let s of subs$ | async; trackBy: trackBySubId"
+    >
+      <h3>{{ s.topicName }}</h3>
+      <p>{{ s.description }}</p>
+
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onUnsubscribe(s.topicId!)"
+      >
+        Unsubscribe
+      </button>
+    </mat-card>
+  </div>
 </section>
