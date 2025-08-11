@@ -19,11 +19,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TopicsComponent } from './pages/topics/topics.component';
 import { SingleArticleComponent } from './pages/single-article/single-article.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { NewArticleComponent } from './pages/new-article/new-article.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     SingleArticleComponent,
     NotFoundComponent,
     ProfileComponent,
+    NewArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
       multi: true,
     },
   ],
+  exports: [HeaderComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

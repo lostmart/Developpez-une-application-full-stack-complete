@@ -32,4 +32,13 @@ export class PostService {
       map((results) => results.flat()) // Flatten array of arrays
     );
   }
+
+  // create a new post
+  createPost(payload: {
+    title: string;
+    content: string;
+    topic: string;
+  }): Observable<Article> {
+    return this.http.post<Article>(this.apiUrl, payload);
+  }
 }

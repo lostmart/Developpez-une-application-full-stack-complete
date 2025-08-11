@@ -12,6 +12,7 @@ import { DesktopHeaderComponent } from './components/header/desktop-header/deskt
 import { MobileHeaderComponent } from './components/header/mobile-header/mobile-header.component';
 
 import { MatMenuModule } from '@angular/material/menu';
+import { MatOption } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
     CardComponent,
     CommentComponent,
     DesktopHeaderComponent,
-    MobileHeaderComponent,
+    MobileHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +30,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatCardModule,
     RouterModule,
     MatMenuModule,
+    
   ],
   exports: [
     CardListComponent,

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<section class="container new-article">
+  <h2>Créer un nouvel article</h2>
+  <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Sélectionner un thème</mat-label>
+      <input matInput formControlName="topic" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="title" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Contenu</mat-label>
+      <textarea matInput formControlName="content" required></textarea>
+    </mat-form-field>
+
+    <button mat-flat-button color="primary" class="submit-button" type="submit">
+      Créer
+    </button>
+  </form>
+</section>

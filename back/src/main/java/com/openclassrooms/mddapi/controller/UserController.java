@@ -18,7 +18,6 @@ import com.openclassrooms.mddapi.model.UserModel;
 import com.openclassrooms.mddapi.service.UserService;
 import com.openclassrooms.mddapi.dto.AuthResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**

@@ -25,10 +25,6 @@ public class PostModel {
     @JoinColumn(name = "author_id", nullable = false)
     private UserModel author;
 
-    // @ManyToOne(fetch = FetchType.LAZY)
-    // @JoinColumn(name = "topic_id", nullable = false)
-    // private TopicModel topic;
-
     @Column(nullable = false)
     private String topic;
 
