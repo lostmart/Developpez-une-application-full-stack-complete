@@ -1,9 +1,18 @@
+@import "src/styles/variables";
+
 .comment-container {
   padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: end;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap: 1em;
+  }
   h3 {
     font-size: 20px;
   }
@@ -11,5 +20,8 @@
     background-color: #eeee;
     padding: 1em;
     border-radius: 1em;
+    @media (min-width: $breakpoint-md) {
+      max-width: 480px;
+    }
   }
 }

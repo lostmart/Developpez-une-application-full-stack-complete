@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Topic } from '../../models/topic.model';
 import { Subscription } from '../../models/subscription.model';
+import { Article } from '../../models/article.model';
 
 @Component({
   selector: 'app-card',
@@ -8,7 +9,7 @@ import { Subscription } from '../../models/subscription.model';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() article: any; // you can strongly type this later
+  @Input() article!: Article;
   @Input() topic!: Topic;
   @Input() subscribedTopic!: Subscription;
   @Output() subscribe = new EventEmitter<number>();

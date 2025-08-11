@@ -1,23 +1,28 @@
 <app-header></app-header>
 
-<section class="single-article-page">
-  <h2>Titre de l’article sélectionné</h2>
-  <div class="single-article-container">
-    <ul class="single-article-metaData">
-      <li>Date</li>
-      <li>Author</li>
-      <li>Tags</li>
-    </ul>
+<!-- single-article.component.html -->
+<ng-container *ngIf="article$ | async as article; else loading">
+  <section class="single-article-page">
+    <h1 class="title">{{ article.title }}</h1>
 
-    <p>
-      Content: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit
-      earum explicabo atque sed consequatur, facilis aut quam, neque doloremque
-      temporibus eaque maiores accusamus eum error fuga repellendus eveniet
-      minus sequi?
-    </p>
-  </div>
-  <div>
-    <h3>Commentaires</h3>
-    <app-comment></app-comment>
-  </div>
-</section>
+    <div class="single-article-container">
+      <ul class="single-article-metaData">
+        <li>Date: {{ article.createdAt | date : "d MMM, y" }}</li>
+        <li>Author: {{ article.author?.userName || "Unknown" }}</li>
+        <li>Topic: {{ article.topic }}</li>
+        <!-- <li>Tags: {{ article.tags?.join(', ') }}</li> -->
+      </ul>
+
+      <p class="content">{{ article.content }}</p>
+    </div>
+
+    <div class="comments">
+      <h3>Commentaires</h3>
+      <app-comment></app-comment>
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #loading>
+  <p>Loading article…</p>
+</ng-template>

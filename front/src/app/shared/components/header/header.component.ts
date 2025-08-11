@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +13,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpointObserver
-      .observe([Breakpoints.Handset])
+      .observe(['(max-width: 768px)']) // <-- custom breakpoint
       .subscribe((result) => {
         this.isMobile = result.matches;
       });
   }
 }
+

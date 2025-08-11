@@ -1,9 +1,9 @@
-import { Article } from './article.model';
+import { Article, Author } from './article.model';
 
 export interface Comment {
   id: number;
   date: string;
-  author: string;
+  author: Author;
   content: string;
   articleId: Article['id'];
 }

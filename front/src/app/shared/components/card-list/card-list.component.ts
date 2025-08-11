@@ -34,7 +34,7 @@ export class CardListComponent implements OnInit {
   }
 
   onUnsubscribeById(topicId: number) {
-    console.log('unsubscribesss', topicId);
+    // console.log('unsubscribesss', topicId);
     if (topicId != null) this.unsubscribe.emit(topicId);
     else console.warn('Topic not found for number', topicId);
   }

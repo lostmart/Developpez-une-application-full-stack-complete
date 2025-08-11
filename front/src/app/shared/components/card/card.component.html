@@ -1,9 +1,9 @@
-<a [routerLink]="['/articles/12']">
+<a [routerLink]="['/articles', article!.id]">
   <mat-card class="article-card" *ngIf="article">
     <h3>{{ article.title }}</h3>
     <div class="article-metaData">
       <span> Date: {{ article.createdAt | date : "d MMM, y" }} </span>
-      <span> Auteur: {{ article.author.userName }} </span>
+      <span> Auteur: {{ article.author?.userName }} </span>
     </div>
     <p class="description">Description: {{ article.content }}</p>
   </mat-card>

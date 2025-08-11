@@ -1,3 +1,5 @@
+@import "../../../styles/variables";
+
 .single-article-page {
   padding: 1em;
   max-width: 800px;
@@ -11,12 +13,12 @@
     .single-article-metaData {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 1em;
       margin-bottom: 1em;
       color: rgb(66, 66, 66);
     }
   }
-
   h3 {
     margin-top: 1.5em;
     font-size: 20px;
