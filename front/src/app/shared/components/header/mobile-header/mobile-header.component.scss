@@ -12,6 +12,13 @@ $breakpoint-md: 768px;
   z-index: 1000;
   border-bottom: 1px solid #e0e0e0;
 
+  .mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+
   button {
     background-color: transparent;
     border: none;
@@ -24,7 +31,7 @@ $breakpoint-md: 768px;
   }
 
   .mobile-menu {
-    position: absolute;
+    position: fixed;
     top: 0;
     right: -185px;
     background-color: white;
@@ -33,12 +40,13 @@ $breakpoint-md: 768px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     gap: 1.5rem;
-    height: 100dvh;
+    height: 72dvh;
     max-width: 185px;
     z-index: 1;
     transition: right 0.3s ease-in-out;
+    justify-content: space-between;
 
     &.show {
       right: 0;

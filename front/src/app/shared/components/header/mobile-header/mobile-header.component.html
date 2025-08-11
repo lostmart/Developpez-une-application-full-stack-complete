@@ -7,30 +7,34 @@
     #menuRef
     [ngClass]="{ 'mobile-menu': true, show: showMenu }"
   >
-    <button (click)="logout()">Se déconnecter</button>
-    <a
-      [routerLink]="['/articles']"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="toggleMenu()"
-      >Articles</a
-    >
-    <a
-      [routerLink]="['/topics']"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="toggleMenu()"
-      >Thèmes</a
-    >
+    <div class="mobile-menu-content">
+      <button (click)="logout()">Se déconnecter</button>
+      <a
+        [routerLink]="['/articles']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="toggleMenu()"
+        >Articles</a
+      >
+      <a
+        [routerLink]="['/topics']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="toggleMenu()"
+        >Thèmes</a
+      >
+    </div>
 
-    <a
-      [routerLink]="['/profile']"
-      *ngIf="authService.isLoggedIn()"
-      mat-icon-button
-      class="avatar-btn"
-    >
-      <span class="material-symbols-outlined">person</span>
-    </a>
+    <div>
+      <a
+        [routerLink]="['/profile']"
+        *ngIf="authService.isLoggedIn()"
+        mat-icon-button
+        class="avatar-btn"
+      >
+        <span class="material-symbols-outlined">person</span>
+      </a>
+    </div>
   </nav>
 
   <button
