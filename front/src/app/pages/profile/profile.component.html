@@ -18,8 +18,14 @@
       <input matInput type="password" formControlName="password" required />
     </mat-form-field>
 
-    <button mat-flat-button color="primary" class="submit-button" type="submit">
-      Sauvegarder
+    <button
+      mat-flat-button
+      color="primary"
+      class="submit-button"
+      type="submit"
+      [disabled]="profileForm.invalid || profileForm.pristine || saving"
+    >
+      {{ saving ? "Saving…" : "Sauvegarder" }}
     </button>
   </form>
 </section>
