@@ -1,0 +1,35 @@
+.topic-card {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+
+  header h3 {
+    margin: 0;
+    font-size: 1.05rem;
+  }
+
+  .desc {
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.4;
+  }
+
+  .actions {
+    margin-top: 0.25rem;
+  }
+
+  .btn {
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #111827;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn--subscribed {
+    border-color: #10b981;
+  }
+}

@@ -1,13 +1,15 @@
 <div class="articles-container container">
-  <app-card *ngFor="let article of articles" [article]="article"></app-card>
+  <!-- Existing article cards -->
   <app-card
-    *ngFor="let topic of topics"
-    [topic]="topic"
+    *ngFor="let a of articles; trackBy: trackByArticleId"
+    [article]="a">
+  </app-card>
+
+  <!-- New topic cards -->
+  <app-topic-card
+    *ngFor="let t of topics; trackBy: trackByTopicId"
+    [topic]="t"
     (subscribe)="onSubscribe($event)"
-  ></app-card>
-  <app-card
-    *ngFor="let subscribedTopic of subscribedTopics"
-    [subscribedTopic]="subscribedTopic"
-    (unsubscribe)="onUnsubscribeById(subscribedTopic.topicId!)"
-  ></app-card>
+    (unsubscribe)="onUnsubscribeById($event)">
+  </app-topic-card>
 </div>

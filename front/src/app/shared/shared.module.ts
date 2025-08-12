@@ -12,7 +12,7 @@ import { DesktopHeaderComponent } from './components/header/desktop-header/deskt
 import { MobileHeaderComponent } from './components/header/mobile-header/mobile-header.component';
 
 import { MatMenuModule } from '@angular/material/menu';
-import { MatOption } from '@angular/material/core';
+import { TopicCardComponent } from './components/topic-card/topic-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { MatOption } from '@angular/material/core';
     CardComponent,
     CommentComponent,
     DesktopHeaderComponent,
-    MobileHeaderComponent
+    MobileHeaderComponent,
+    TopicCardComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +31,6 @@ import { MatOption } from '@angular/material/core';
     MatCardModule,
     RouterModule,
     MatMenuModule,
-    
   ],
   exports: [
     CardListComponent,
@@ -40,6 +40,7 @@ import { MatOption } from '@angular/material/core';
     MatButtonModule,
     RouterModule,
     CommentComponent,
+    TopicCardComponent,
   ],
 })
 export class SharedModule {}

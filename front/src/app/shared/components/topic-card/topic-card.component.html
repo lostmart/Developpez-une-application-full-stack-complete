@@ -1,0 +1,26 @@
+<ng-container *ngIf="topic">
+  <article class="topic-card">
+    <header>
+      <h3>{{ topic.name }}</h3>
+    </header>
+
+    <p class="desc" *ngIf="topic.description">{{ topic.description }}</p>
+
+    <div class="actions">
+      <button
+        type="button"
+        class="btn"
+        [class.btn--subscribed]="topic.subscribed"
+        (click)="onToggle()"
+        [attr.aria-pressed]="topic.subscribed"
+        [attr.aria-label]="
+          topic.subscribed
+            ? 'Unsubscribe from ' + topic.name
+            : 'Subscribe to ' + topic.name
+        "
+      >
+        {{ topic.subscribed ? "Unsubscribe" : "Subscribe" }}
+      </button>
+    </div>
+  </article>
+</ng-container>
