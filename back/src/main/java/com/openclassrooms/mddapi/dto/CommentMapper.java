@@ -8,8 +8,10 @@ public class CommentMapper {
         CommentResponseDTO dto = new CommentResponseDTO();
         dto.setId(m.getId());
         dto.setContent(m.getContent());
-        dto.setAuthor(new UserDTO(m.getAuthor())); // ✅ wrap entity in your DTO
+        dto.setAuthor(new UserDTO(m.getAuthor()));
         dto.setPostId(m.getPost().getId());
+        dto.setCreatedAt(m.getCreatedAt()); // ✅ map dates
+        dto.setUpdatedAt(m.getUpdatedAt()); // ✅ map dates
         return dto;
     }
 }

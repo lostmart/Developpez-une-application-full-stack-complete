@@ -21,7 +21,8 @@
     padding: 1em;
     border-radius: 1em;
     @media (min-width: $breakpoint-md) {
-      max-width: 480px;
+      min-width: 480px;
+      min-height: 95px;
     }
   }
 }

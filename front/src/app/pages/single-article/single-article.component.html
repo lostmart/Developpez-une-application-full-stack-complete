@@ -18,7 +18,9 @@
 
     <div class="comments">
       <h3>Commentaires</h3>
-      <app-comment></app-comment>
+      <ng-container *ngFor="let c of comments">
+        <app-comment [comment]="c"></app-comment>
+      </ng-container>
     </div>
   </section>
 </ng-container>

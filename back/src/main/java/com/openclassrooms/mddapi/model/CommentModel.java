@@ -35,4 +35,16 @@ public class CommentModel {
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 
+    // Automatically sets timestamps
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
+
 }

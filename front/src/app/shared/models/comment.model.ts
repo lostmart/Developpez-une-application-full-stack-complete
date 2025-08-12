@@ -1,9 +1,20 @@
-import { Article, Author } from './article.model';
-
-export interface Comment {
+export interface CommentAuthor {
   id: number;
-  date: string;
-  author: Author;
+  username: string;
+  email: string;
+  picture: string | null;
+}
+
+export interface ApiComment {
+  id: number;
   content: string;
-  articleId: Article['id'];
+  author: CommentAuthor;
+  postId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CreateCommentPayload {
+  content: string;
+  postId: number;
 }

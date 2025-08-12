@@ -23,7 +23,7 @@ public class CommentService {
             comment.setCreatedAt(now);
         }
         comment.setUpdatedAt(now);
-        return commentRepo.save(comment);
+        return commentRepo.saveAndFlush(comment); // ✅ ensure DB insert + @PrePersist run
     }
 
     /** Get all comments for a post */
