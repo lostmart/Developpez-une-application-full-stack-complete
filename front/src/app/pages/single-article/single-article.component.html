@@ -22,6 +22,32 @@
         <app-comment [comment]="c"></app-comment>
       </ng-container>
     </div>
+
+    <!-- Add comment form -->
+    <form
+      class="comment-form"
+      [formGroup]="commentForm"
+      (ngSubmit)="submitComment()"
+    >
+      <textarea
+        formControlName="content"
+        placeholder="Écrivez ici votre commentaire"
+        rows="3"
+        (keydown.enter)="maybeSubmit($any($event))"
+      ></textarea>
+
+      <button
+        mat-button
+        type="submit"
+        class="send-btn"
+        [disabled]="commentForm.invalid || submitting"
+        aria-label="Envoyer"
+        title="Envoyer"
+      >
+        <span class="material-symbols-outlined"> send </span>
+      </button>
+    </form>
+    <div class="error" *ngIf="error">{{ error }}</div>
   </section>
 </ng-container>
 

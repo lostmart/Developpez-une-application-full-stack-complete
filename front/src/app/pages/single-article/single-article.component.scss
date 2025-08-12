@@ -24,3 +24,27 @@
     font-size: 20px;
   }
 }
+
+.comment-form {
+  padding: 1em;
+  display: flex;
+  gap: 1em;
+  align-content: center;
+  align-items: center;
+
+  textarea {
+    border-radius: 16px;
+    border: 1px solid #000;
+    width: 100%;
+    min-height: 100px;
+    padding: 1em;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+  }
+
+  .send-btn {
+    color: $primary-color;
+    transform: rotate(320deg);
+    font-size: 2em;
+  }
+}
