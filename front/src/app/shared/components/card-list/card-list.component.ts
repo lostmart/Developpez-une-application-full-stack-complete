@@ -19,13 +19,14 @@ import { Article } from '../../models/article.model';
 export class CardListComponent implements OnInit, OnChanges {
   @Input() articles: Article[] = [];
   @Input() topics: Topic[] = [];
-  @Input() subTopics: Topic[] = [];
   @Input() subscribedTopics: Subscription[] = [];
 
   @Output() subscribe = new EventEmitter<number>();
   @Output() unsubscribe = new EventEmitter<number>();
 
   private topicNameToId = new Map<string, number>();
+
+  displayTopics: Topic[] = [];
 
   ngOnInit(): void {
     this.rebuildIndex();

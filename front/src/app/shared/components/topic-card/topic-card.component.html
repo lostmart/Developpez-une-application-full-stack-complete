@@ -1,17 +1,21 @@
 <ng-container *ngIf="topic">
-  <article class="topic-card">
+  <article class="article-card">
     <header>
       <h3>{{ topic.name }}</h3>
     </header>
 
-    <p class="desc" *ngIf="topic.description">{{ topic.description }}</p>
+    <p class="description" *ngIf="topic.description">{{ topic.description }}</p>
 
     <div class="actions">
       <button
+        mat-flat-button
         type="button"
-        class="btn"
-        [class.btn--subscribed]="topic.subscribed"
-        (click)="onToggle()"
+        class="subscribe-btn"
+        [color]="topic.subscribed ? undefined : 'primary'"
+        (click)="onSubscribeClick()"
+
+        [disabled]="topic.subscribed"
+
         [attr.aria-pressed]="topic.subscribed"
         [attr.aria-label]="
           topic.subscribed
@@ -19,7 +23,7 @@
             : 'Subscribe to ' + topic.name
         "
       >
-        {{ topic.subscribed ? "Unsubscribe" : "Subscribe" }}
+        {{ topic.subscribed ? "Déjà abonné" : "S’abonner" }}
       </button>
     </div>
   </article>

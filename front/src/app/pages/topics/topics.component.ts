@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
-import { Subscription as AppSubscription } from 'src/app/shared/models/subscription.model';
+import { combineLatest, map } from 'rxjs';
 import { Topic } from 'src/app/shared/models/topic.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SubscriptionService } from 'src/app/shared/services/subscription.service';
@@ -13,7 +12,6 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 })
 export class TopicsComponent implements OnInit {
   topics: Topic[] = [];
-  subs$!: Observable<AppSubscription[]>; // from the service
 
   constructor(
     private topicService: TopicService,
@@ -27,27 +25,24 @@ export class TopicsComponent implements OnInit {
       this.auth.getUserId() || Number(localStorage.getItem('user_id'));
     if (!token) return;
 
-    // start the stream of user subscriptions
-    this.subscriptionService.loadUserSubscriptions(userId);
-    this.subs$ = this.subscriptionService.subs$;
+    // Seed the live subject with the user’s subscriptions
+    this.subscriptionService.loadUserSubscriptions(userId).subscribe();
 
-    // recompute `topics` whenever subs change
-    this.topicService
-      .getTopics(token)
+    // Derive topics with a boolean `subscribed` flag (join by ID)
+    combineLatest([
+      this.topicService.getTopics(token),
+      this.subscriptionService.subs$,
+    ])
       .pipe(
-        switchMap((topicsData) =>
-          this.subs$.pipe(
-            map((subs) => {
-              const subscribedNames = new Set(subs.map((s) => s.topicName));
-              return topicsData.map((t) => ({
-                ...t,
-                subscribed: subscribedNames.has(t.name),
-              }));
-            })
-          )
-        )
+        map(([topicsData, subs]) => {
+          const subscribedIds = new Set(subs.map((s) => s.topicId));
+          return topicsData.map<Topic>((t) => ({
+            ...t,
+            subscribed: subscribedIds.has(t.id),
+          }));
+        })
       )
-      .subscribe((mapped) => (this.topics = mapped));
+      .subscribe((withFlags) => (this.topics = withFlags));
   }
 
   handleSubscribe(topicId: number): void {
@@ -56,12 +51,7 @@ export class TopicsComponent implements OnInit {
 
     this.subscriptionService
       .subscribeToTopic(topicId, topic.description ?? '')
-      .subscribe({
-        next: () => {
-          // no manual flip needed; subs$ updates -> topics recomputed
-        },
-        error: (err) => console.error('Failed to subscribe:', err),
-      });
+      .subscribe();
   }
 
   trackByTopicId = (_: number, t: Topic) => t.id;

@@ -18,10 +18,7 @@ export class TopicCardComponent {
   @Output() subscribe = new EventEmitter<number>();
   @Output() unsubscribe = new EventEmitter<number>();
 
-  onToggle(): void {
-    if (!this.topic?.id && this.topic?.id !== 0) return;
-    this.topic.subscribed
-      ? this.unsubscribe.emit(this.topic.id)
-      : this.subscribe.emit(this.topic.id);
+  onSubscribeClick() {
+    this.subscribe.emit(this.topic.id);
   }
 }

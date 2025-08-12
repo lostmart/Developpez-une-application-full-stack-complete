@@ -1,8 +1,6 @@
 <div class="articles-container container">
-  <!-- Existing article cards -->
-  <app-card
-    *ngFor="let a of articles; trackBy: trackByArticleId"
-    [article]="a">
+  <!-- articles cards -->
+  <app-card *ngFor="let a of articles; trackBy: trackByArticleId" [article]="a">
   </app-card>
 
   <!-- New topic cards -->
@@ -10,6 +8,6 @@
     *ngFor="let t of topics; trackBy: trackByTopicId"
     [topic]="t"
     (subscribe)="onSubscribe($event)"
-    (unsubscribe)="onUnsubscribeById($event)">
+  >
   </app-topic-card>
 </div>
