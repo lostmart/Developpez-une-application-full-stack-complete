@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, Observable, switchMap, take, finalize } from 'rxjs';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

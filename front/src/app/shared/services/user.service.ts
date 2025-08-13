@@ -24,10 +24,6 @@ export class UserService {
     return this.http.get<Subscription[]>(`${this.apiUrl}/user/${userId}`);
   }
 
-  // unsubscribe(userId: number, topicId: number): Observable<any> {
-  //   return this.http.delete(`${this.apiUrl}/user/${userId}/topic/${topicId}`);
-  // }
-
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/${userId}`);
   }

@@ -1,10 +1,13 @@
 <app-header></app-header>
 <div class="register-container">
-
   <img src="/assets/logo_p6.png" alt="logo" class="logo-main" />
   <h1 class="form-title">Inscription</h1>
 
-  <form class="register-form" (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+  <form
+    class="register-form"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="registerForm"
+  >
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nom d'utilisateur</mat-label>
       <input matInput formControlName="username" required />
@@ -15,9 +18,36 @@
       <input matInput type="email" formControlName="email" required />
     </mat-form-field>
 
+    <!-- Password -->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Mot de passe</mat-label>
-      <input matInput type="password" formControlName="password" required />
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+        autocomplete="new-password"
+        required
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Toggle password visibility'"
+        [attr.aria-pressed]="!hidePassword"
+      >
+        <mat-icon>{{
+          hidePassword ? "visibility" : "visibility_off"
+        }}</mat-icon>
+      </button>
+      <mat-error *ngIf="f['password'].hasError('required')"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="f['password'].hasError('weakPassword')">
+        Le mot de passe doit contenir au moins 8 caractères et inclure un
+        chiffre, une lettre minuscule, une lettre majuscule et un caractère
+        spécial.
+      </mat-error>
     </mat-form-field>
 
     <button mat-flat-button color="primary" class="submit-button" type="submit">

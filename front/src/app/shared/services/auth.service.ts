@@ -3,6 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
+
+export interface RegisterPayload {
+  username: string;
+  email: string;
+  password: string;
+  picture?: string | null;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,5 +44,10 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getToken();
+  }
+
+  register(payload: RegisterPayload): Observable<any> {
+    console.log(payload);
+    return this.http.post(`${this.apiUrl}/register`, payload);
   }
 }

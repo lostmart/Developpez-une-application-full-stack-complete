@@ -35,14 +35,16 @@ public class UserService {
         this.tokenProvider = tokenProvider;
     }
 
-    public UserModel registerUser(UserModel user) {
+    public UserDTO registerUser(UserModel user) {
         if (userRepo.existsByEmail(user.getEmail())) {
             throw new EmailAlreadyExistsException("This email is already taken");
         }
 
         // Encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        userRepo.save(user);
+
+        return new UserDTO(user);
     }
 
     public AuthResult loginUser(String email, String password) {
