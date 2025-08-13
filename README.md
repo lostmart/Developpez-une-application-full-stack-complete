@@ -73,7 +73,7 @@ front/
 
 ## 🖥️ Backend: Java + Spring
 
-- Spring Core (mandatory)
+- Spring Core
 - Spring Boot and other Spring modules
 
 ### 📌 Key Technical Choices
@@ -82,6 +82,32 @@ front/
 
 - Layered architecture: Controllers → Services → Repositories (standard)
 - DTOs and Mappers (MapStruct)
+
+### Folder Architecture:
+
+```
+back/
+├── .mvn/
+├── src/
+│   ├── main/
+│   │   ├── java/com/openclassrooms/mddapi/
+│   │   │   ├── config/
+│   │   │   ├── controller/
+│   │   │   ├── dto/
+│   │   │   ├── exception/
+│   │   │   ├── model/
+│   │   │   ├── repo/
+│   │   │   ├── security/
+│   │   │   ├── service/
+│   │   │   └── MddApiApplication.java
+│   │   └── resources/
+│   └── test/
+├── target/
+├── .gitignore
+├── mvnw
+├── mvnw.cmd
+└── pom.xml
+```
 
 #### Database
 
