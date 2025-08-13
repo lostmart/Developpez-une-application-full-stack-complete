@@ -3,7 +3,11 @@
 .articles-page {
   padding: 1rem;
 
-  .articles-header{
+  @media (min-width: $breakpoint-md) {
+    padding: 1.5rem;
+  }
+
+  .articles-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,5 +16,11 @@
   button {
     background-color: #7451eb;
     color: white;
+  }
+
+  .sort-button {
+    background-color: transparent;
+    color: white;
+    color: inherit;
   }
 }

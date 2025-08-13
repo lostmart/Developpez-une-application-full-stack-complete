@@ -13,6 +13,8 @@ import { SubscriptionService } from 'src/app/shared/services/subscription.servic
 export class ArticlesComponent {
   articles: Article[] = [];
 
+  sortAsc = false;
+
   constructor(
     private postService: PostService,
     private subscriptionService: SubscriptionService,
@@ -20,8 +22,6 @@ export class ArticlesComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log('articles');
-    
     const userId =
       Number(localStorage.getItem('user_id')) ||
       Number(this.authService.getUserId());
@@ -35,5 +35,34 @@ export class ArticlesComponent {
             this.articles = articles;
           });
       });
+  }
+
+  toggleSort(): void {
+    this.sortAsc = !this.sortAsc;
+    this.applySort();
+  }
+
+  private applySort(): void {
+    const dir = this.sortAsc ? 1 : -1;
+    this.articles = [...this.articles].sort((a, b) => {
+      const ad = this.extractDate(a);
+      const bd = this.extractDate(b);
+      return (ad - bd) * dir;
+    });
+  }
+
+  private extractDate(a: Article): number {
+    const candidateKeys = [
+      'date',
+      'createdAt',
+      'created_at',
+      'publishedAt',
+      'updatedAt',
+    ];
+    for (const k of candidateKeys) {
+      const v = (a as any)?.[k];
+      if (v) return new Date(v).getTime();
+    }
+    return 0; // fallback so undefined dates sink to the bottom/top consistently
   }
 }

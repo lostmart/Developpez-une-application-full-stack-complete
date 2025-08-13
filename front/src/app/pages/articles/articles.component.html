@@ -4,7 +4,12 @@
     <button mat-stroked-button [routerLink]="['/articles-new']">
       Créer un article
     </button>
-    <button mat-stroked-button>Trier par</button>
+    <button class="sort-button" mat-button (click)="toggleSort()">
+      Trier par date
+      <span class="material-symbols-outlined">
+        {{ sortAsc ? "north" : "south" }}
+      </span>
+    </button>
   </div>
 
   <!-- Articles Container -->
