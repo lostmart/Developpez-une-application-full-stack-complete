@@ -117,6 +117,7 @@ back/
 - Spring Security with JWT
 - Encode with jjwt
 - Encoded passwords stored on DB
+- Each comment, subscription, post topic is created based on the user's id extracted from the token
 
 #### Data Access
 
@@ -139,6 +140,31 @@ back/
 - http://localhost:8080/api/users/register POST -> register new user
 - http://localhost:8080/api/users/login POST -> login registered user
 - http://localhost:8080/api/users/:userId -> get user's id, userName, email and image
+
+### Posts:
+
+- http://localhost:8080/api/posts GET -> get a list of posts with their id, title, content, author, topic and date of creation
+- http://localhost:8080/api/posts POST -> create a new post. You need to send a title, content and a topic
+- http://localhost:8080/api/posts/:postId GET -> get a post based on its id
+- http://localhost:8080/api/posts/topic-name/:postName GET -> get a post based on its topic name
+
+### Topics:
+
+- http://localhost:8080/api/topics GET -> get a list of all possible topics. Each topic contains an id, a name, a description and a cretor id
+- http://localhost:8080/api/topics/:topicId GET -> get one topic based on its id
+- http://localhost:8080/api/topics POST -> create a new topic. You need to send the topic name and description
+
+### Subscriptions:
+
+- http://localhost:8080/api/subscriptions GET -> get a list of all existent subccsiptions from all users
+- http://localhost:8080/api/subscriptions/user/:userId GET -> get all the topics to which the user is subcribed
+- http://localhost:8080/api/subscriptions/user/:topicId DELETE -> unsubscribe to a topic based on its id
+- http://localhost:8080/api/subscriptions/subscribe/:topicId POST -> subscribe a user to a topic
+
+### Comments:
+
+- http://localhost:8080/api/comments/post/:postId GET -> get all comments based on a post id
+- http://localhost:8080/api/comments POST -> create a comment for a specific post. You need to provide the ^pst id and the content in the request's body
 
 ## 📂 Assets for API & Database Testing
 
