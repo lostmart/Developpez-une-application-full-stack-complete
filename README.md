@@ -54,11 +54,10 @@ front/
 #### Routing Strategy
 
 - Angular’s built-in router
-- Lazy-loading modules (optional)
 
 #### Form Handling
 
-- Prefer Reactive Forms for better control and validation handling
+- Reactive Forms
 
 #### CSS Framework
 
@@ -67,7 +66,7 @@ front/
 #### Authentication Token Handling
 
 - HttpInterceptor to inject JWT into headers
-- Store token in localStorage or sessionStorage
+- Store token in localStorage
 
 ---
 
@@ -112,37 +111,17 @@ back/
 #### Database
 
 - MySQL
-- MySQL / H2 for easier local setup and CI/CD testing.
 
 #### Security
 
-- Options: Spring Security with JWT
+- Spring Security with JWT
 - Encode with jjwt
+- Encoded passwords stored on DB
 
 #### Data Access
 
 - Spring Data JPA with Hibernate
 - Constraints and validations (`@NotNull`, `@Size`, etc.)
-
-#### Error Handling
-
-- Global error handler with `@ControllerAdvice`
-
----
-
-## 🔐 Security Layer
-
-### Frontend:
-
-- Store token securely (e.g., HttpOnly cookie if going advanced)
-- Redirect to login on 401 errors
-
-### Backend:
-
-- Filter and validate JWT in request headers
-- Protect endpoints with `@PreAuthorize` or configuration-based rules
-
----
 
 ## 📦 Project Structure
 
@@ -157,8 +136,9 @@ back/
 
 ### Users:
 
-- http://localhost:8080/api/users/register POST: register new user
-- http://localhost:8080/api/users/login POST: login registered user
+- http://localhost:8080/api/users/register POST -> register new user
+- http://localhost:8080/api/users/login POST -> login registered user
+- http://localhost:8080/api/users/:userId -> get user's id, userName, email and image
 
 ## 📂 Assets for API & Database Testing
 
