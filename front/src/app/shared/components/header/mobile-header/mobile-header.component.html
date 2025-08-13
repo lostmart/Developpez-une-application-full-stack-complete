@@ -1,47 +1,57 @@
 <!-- mobile-navbar.component.html -->
-<header class="mobile-header">
-  <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
+<div class="container">
+  <header class="mobile-header">
+    <a class="icon-button" [routerLink]="['/']">
+      <img src="/assets/logo_p6.png" alt="MDD logo" class="logo" />
+    </a>
 
-  <nav
-    *ngIf="authService.isLoggedIn()"
-    #menuRef
-    [ngClass]="{ 'mobile-menu': true, show: showMenu }"
-  >
-    <div class="mobile-menu-content">
-      <button (click)="logout()">Se déconnecter</button>
-      <a
-        [routerLink]="['/articles']"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="toggleMenu()"
-        >Articles</a
-      >
-      <a
-        [routerLink]="['/topics']"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-        (click)="toggleMenu()"
-        >Thèmes</a
-      >
-    </div>
+    <nav
+      *ngIf="authService.isLoggedIn()"
+      #menuRef
+      [ngClass]="{ 'mobile-menu': true, show: showMenu }"
+    >
+      <div class="mobile-menu-content">
+        <button (click)="logout()">Se déconnecter</button>
+        <a
+          [routerLink]="['/articles']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggleMenu()"
+          >Articles</a
+        >
+        <a
+          [routerLink]="['/topics']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="toggleMenu()"
+          >Thèmes</a
+        >
+      </div>
 
-    <div>
-      <a
-        [routerLink]="['/profile']"
-        *ngIf="authService.isLoggedIn()"
-        mat-icon-button
-        class="avatar-btn"
-      >
-        <span class="material-symbols-outlined">person</span>
-      </a>
-    </div>
-  </nav>
+      <div>
+        <a
+          [routerLink]="['/profile']"
+          *ngIf="authService.isLoggedIn()"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          mat-icon-button
+          class="avatar-btn"
+        >
+          <span class="material-symbols-outlined">person</span>
+        </a>
+      </div>
+    </nav>
 
-  <button
-    *ngIf="authService.isLoggedIn()"
-    mat-icon-button
-    (click)="toggleMenu()"
-  >
-    <mat-icon>menu</mat-icon>
+    <button
+      *ngIf="authService.isLoggedIn()"
+      mat-icon-button
+      (click)="toggleMenu()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </header>
+
+  <button mat-icon-button class="back-button" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
   </button>
-</header>
+</div>

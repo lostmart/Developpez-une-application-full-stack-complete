@@ -104,7 +104,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.profileForm.invalid /* || this.profileForm.pristine */) return;
+    if (this.profileForm.invalid) return;
 
     const userId =
       Number(localStorage.getItem('user_id')) || Number(this.auth.getUserId());
@@ -123,21 +123,18 @@ export class ProfileComponent implements OnInit {
       .pipe(
         take(1),
         finalize(() => {
-          // ALWAYS runs (success or error)
           this.saving = false;
-          this.f['password'].reset(''); // don’t keep typed password around
-          // If you use OnPush and still see stale UI, uncomment:
-          // this.cdr.markForCheck();
+          this.f['password'].reset('');
         })
       )
       .subscribe({
         next: () => {
           this.snack.open('Profile updated', 'Close', { duration: 2500 });
-          this.profileForm.markAsPristine(); // form becomes pristine after a save
+          this.profileForm.markAsPristine();
         },
         error: () => {
           this.snack.open('Failed to update profile', 'Close', {
-            duration: 3000,
+            duration: 2000,
           });
         },
       });

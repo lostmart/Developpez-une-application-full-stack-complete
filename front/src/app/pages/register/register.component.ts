@@ -48,12 +48,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('running the register ...');
-    // if (this.registerForm.invalid) {
-    //   this.registerForm.markAllAsTouched();
-    //   return;
-    // }
-
     this.submitting = true;
 
     const payload: RegisterPayload = {

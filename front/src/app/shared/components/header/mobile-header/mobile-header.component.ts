@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-mobile-header',
@@ -12,7 +13,11 @@ export class MobileHeaderComponent {
 
   @ViewChild('menuRef') menuRef!: ElementRef;
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private location: Location
+  ) {}
 
   toggleMenu() {
     this.showMenu = !this.showMenu;
@@ -22,6 +27,10 @@ export class MobileHeaderComponent {
     this.authService.logout();
     this.toggleMenu();
     this.router.navigate(['/login']);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   @HostListener('document:click', ['$event'])

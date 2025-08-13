@@ -30,6 +30,8 @@
         [routerLink]="['/profile']"
         *ngIf="authService.isLoggedIn()"
         mat-icon-button
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
         class="avatar-btn"
       >
         <span class="material-symbols-outlined">person</span>

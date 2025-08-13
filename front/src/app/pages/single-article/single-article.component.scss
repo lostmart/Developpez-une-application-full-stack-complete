@@ -43,8 +43,10 @@
   }
 
   .send-btn {
-    color: $primary-color;
-    transform: rotate(320deg);
-    font-size: 2em;
+    .material-symbols-outlined {
+      transform: rotate(320deg);
+      color: $primary-color;
+      font-size: 3em;
+    }
   }
 }
