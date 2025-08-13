@@ -8,21 +8,40 @@
 ### Folder Architecture:
 
 ```
-src/
-└── app/
-    ├── core/               # ✅ singleton services, interceptors, guards
-    ├── shared/             # ✅ reusable UI components, pipes, directives
-    ├── pages/              # ✅ routed feature modules
-    │   ├── home/
-    │   │   ├── home.component.ts
-    │   │   ├── home.component.html
-    │   │   ├── home.component.scss
-    │   │   └── home.module.ts   # 🔄 RECOMMENDED: lazy-loadable feature module
-    │   └── auth/               # 👈 later: login, register, forgot-password
-    │   └── profile/            # 👈 later: user profile page, etc.
-    ├── app.component.ts        # root shell
-    ├── app-routing.module.ts   # lazy loading
-    └── app.module.ts           # import core/shared only here
+front/
+├── .angular/
+├── .vscode/
+├── node_modules/
+├── src/
+│   ├── app/
+│   │   ├── pages/
+│   │   │   ├── articles/
+│   │   │   ├── home/
+│   │   │   ├── login/
+│   │   │   ├── new-article/
+│   │   │   ├── not-found/
+│   │   │   ├── profile/
+│   │   │   ├── register/
+│   │   │   ├── single-article/
+│   │   │   └── topics/
+│   │   ├── shared/
+│   │   │   ├── components/
+│   │   │   ├── guards/
+│   │   │   ├── interceptors/
+│   │   │   ├── models/
+│   │   │   ├── services/
+│   │   │   └── validators/
+│   │   ├── app-routing.module.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.scss
+│   │   ├── app.component.spec.ts
+│   │   ├── app.component.ts
+│   │   ├── app.module.ts
+│   │   └── shared.module.ts
+│   ├── assets/
+│   ├── environments/
+│   ├── styles/
+│   └── favicon.png
 ```
 
 ### 📌 Key Technical Choices
@@ -50,6 +69,8 @@ src/
 - HttpInterceptor to inject JWT into headers
 - Store token in localStorage or sessionStorage
 
+---
+
 ## 🖥️ Backend: Java + Spring
 
 - Spring Core (mandatory)
@@ -75,11 +96,13 @@ src/
 #### Data Access
 
 - Spring Data JPA with Hibernate
-- Constraints and validations (@NotNull, @Size, etc.)
+- Constraints and validations (`@NotNull`, `@Size`, etc.)
 
 #### Error Handling
 
 - Global error handler with `@ControllerAdvice`
+
+---
 
 ## 🔐 Security Layer
 
@@ -88,17 +111,21 @@ src/
 - Store token securely (e.g., HttpOnly cookie if going advanced)
 - Redirect to login on 401 errors
 
-### Backend
+### Backend:
 
 - Filter and validate JWT in request headers
 - Protect endpoints with `@PreAuthorize` or configuration-based rules
 
+---
+
 ## 📦 Project Structure
 
-- Frontend:
-  - /components, /services, /models, /guards, /pages
-- Backend:
-  - com.mdd.app.controller, ...service, ...repository, ...model, ...security, ...dto
+- **Frontend:**
+  - `/components`, `/services`, `/models`, `/guards`, `/pages`
+- **Backend:**
+  - `com.mdd.app.controller`, `.service`, `.repository`, `.model`, `.security`, `.dto`
+
+---
 
 ## Endpoints
 
@@ -107,13 +134,17 @@ src/
 - http://localhost:8080/api/users/register POST: register new user
 - http://localhost:8080/api/users/login POST: login registered user
 
-## ✅ Final Evaluation Checkpoints
+## 📂 Assets for API & Database Testing
 
-- All required features (register/login, themes, posts, comments, profile)
-- Code follows best practices (indentation, SOLID, Javadoc)
-- Frontend and backend are well integrated via API
-- Your documentation matches the implementation
-- GitHub repo is complete and link is shared
+Inside the [`/assets`](./assets) folder you will find:
+
+- **MDD-mond-de-development.postman_collection.json** → Postman collection to test all RESTful API endpoints (users, topics, posts, comments, subscriptions).
+- **mdd.sql** → MySQL dump of the database schema and seed data.
+- **Readme.txt** → Detailed documentation on using the Postman collection and database structure.
+
+For setup and testing instructions, read the [`Readme.txt`](./assets/Readme.txt) file first.
+
+---
 
 ## UML
 

@@ -1,0 +1,583 @@
+{
+	"info": {
+		"_postman_id": "1049721b-6585-447e-a3fc-b73042de0151",
+		"name": "MDD-mond-de-development",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20546514"
+	},
+	"item": [
+		{
+			"name": "User-Auth",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/users/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"0001test@test.net\",\r\n    \"password\": \"123pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/users/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test01\",\r\n    \"email\": \"0001test@test.net\",\r\n    \"password\": \"123pass\",\r\n    \"picture\": \"somepic.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ3MzQxNDUsImV4cCI6MTc1NDgyMDU0NX0.JyuyciKDrrQqW2mhJpqBLORxdjHHMc4Ivw4RwdyVHRQ8xu4TRAsMtK5tapCdNenwwoTbS2eSTHyG5WkS5atWtA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"12"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5OTU1NjYsImV4cCI6MTc1NTA4MTk2Nn0.WuytbwbKlhtrF9fWBqOGEV-OgxDDTUHS2fhfw8_gCRbj8biqSw_ZO4F5g4lnFTV7Ds1b8ncFHlR57pWHMOzgXw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "MDD-mond-de-development",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQxNjM3NjEsImV4cCI6MTc1NDI1MDE2MX0.r2xRrGP-rAczeixC-txok9AQugf3rJc8d8JOKCt-5k92MDGDtOl3IPkgXcr4gOOk1HzYXkpYUeLuoQKhbAkSMQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Javascript intermediate 03\",\r\n  \"content\": \"the content for javascript course intermediate \",\r\n  \"topic\": \"JS\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5Mzc0OTIsImV4cCI6MTc1NTAyMzg5Mn0.SAIIe0XKoEbUJdqhURyUQ1pJqf-KU3S3JGCH6j6gXMjBntlSfkxLanoa7CExMChn7OirI2fe-cLxRCe_hzbSfg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get post by topic name",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ0OTA4MTYsImV4cCI6MTc1NDU3NzIxNn0.Kka2GTblexLZ0yC9xS9kAx9jIRPpkzzLRHgo2QUPStKT2wta_yPGpfRwD6G5OzD7o1e_0O2FSsoQbDR0ZQu49A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/posts/topic-name/JS-Beginner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"posts",
+								"topic-name",
+								"JS-Beginner"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Topics",
+			"item": [
+				{
+					"name": "http://localhost:8080/api/topics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5OTU1NjYsImV4cCI6MTc1NTA4MTk2Nn0.WuytbwbKlhtrF9fWBqOGEV-OgxDDTUHS2fhfw8_gCRbj8biqSw_ZO4F5g4lnFTV7Ds1b8ncFHlR57pWHMOzgXw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/topics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"topics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/topics/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ3NzA1ODYsImV4cCI6MTc1NDg1Njk4Nn0.6ToSThKtPCamrq8EomNMkVYZsqbV3J4r9yPkdJp6cC-8wFzQRl0RGFPAl59m03v4HfvDLliStvf1aMUUbmaskQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/topics/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"topics",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/topics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5MDIyMjYsImV4cCI6MTc1NDk4ODYyNn0.NbAP2CDFmTR_7BdgEWJ48TDbkVr9lT9a1XLxQqDYYoTRAg0mkHJJKcVQjBr2wo_fzTiYokJF9KuDVC-wW5n80Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"C#\", \r\n    \"description\": \"C# is a modern, object-oriented programming language developed by Microsoft as part of the .NET platform. It is designed for building a wide range of applications, including desktop software, web services, mobile apps, and games using frameworks like Unity. C# offers strong typing, garbage collection, and a rich standard library, combining the efficiency of compiled languages with the productivity of high-level ones. It integrates seamlessly with the .NET ecosystem and supports asynchronous programming, making it well-suited for scalable, high-performance solutions.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/topics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"topics"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subscriptions",
+			"item": [
+				{
+					"name": "get all subscriptions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ0Njk1OTQsImV4cCI6MTc1NDU1NTk5NH0.Ab22BjJEMbe4vapUtCMPDf4z357R-cG3Jd3KyiQvxIID-KPzRMCgDngG5pjACPnMTVhIwHoq3BA7rCWuZg1idw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/subscriptions/user/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"subscriptions",
+								"user",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/api/subscriptions/subscribe/11",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ4MzI1MzksImV4cCI6MTc1NDkxODkzOX0.Cpcr8ClccIqQC5U3VGwDOJ3YLv5aRus9nwgSxZYnDwlSwTGSDXCpvzJHJJM3GlpkJIiO3pTU4xx9JGD-Nfkq6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"this is a description placeholder ...\",\r\n    \"topicId\": 13\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/subscriptions/subscribe/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"subscriptions",
+								"subscribe",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get subscriptions by user ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5OTU1NjYsImV4cCI6MTc1NTA4MTk2Nn0.WuytbwbKlhtrF9fWBqOGEV-OgxDDTUHS2fhfw8_gCRbj8biqSw_ZO4F5g4lnFTV7Ds1b8ncFHlR57pWHMOzgXw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/subscriptions/user/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"subscriptions",
+								"user",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ4MzI1MzksImV4cCI6MTc1NDkxODkzOX0.Cpcr8ClccIqQC5U3VGwDOJ3YLv5aRus9nwgSxZYnDwlSwTGSDXCpvzJHJJM3GlpkJIiO3pTU4xx9JGD-Nfkq6A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/subscriptions/unsubscribe/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"subscriptions",
+								"unsubscribe",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Get all the subscriptions here !!\n\nSubscribe to a topic passing the sopic id as a param"
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "get comments by post ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5OTU1NjYsImV4cCI6MTc1NTA4MTk2Nn0.WuytbwbKlhtrF9fWBqOGEV-OgxDDTUHS2fhfw8_gCRbj8biqSw_ZO4F5g4lnFTV7Ds1b8ncFHlR57pWHMOzgXw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comments/post/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"post",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create a new comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VySWQiOjExLCJpYXQiOjE3NTQ5OTU1NjYsImV4cCI6MTc1NTA4MTk2Nn0.WuytbwbKlhtrF9fWBqOGEV-OgxDDTUHS2fhfw8_gCRbj8biqSw_ZO4F5g4lnFTV7Ds1b8ncFHlR57pWHMOzgXw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"content\": \"This is my comment on post 19 about python\",\r\n  \"postId\": 19\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "welcome-message",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080"
+				}
+			},
+			"response": []
+		}
+	]
+}
