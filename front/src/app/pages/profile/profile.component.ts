@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, Observable, switchMap, take, finalize } from 'rxjs';
+import { strongPassword } from 'src/app/shared/validators/password.validators';
 
 @Component({
   selector: 'app-profile',
@@ -40,7 +41,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: [''],
+      password: ['', [Validators.required, strongPassword()]],
     });
 
     const userId =

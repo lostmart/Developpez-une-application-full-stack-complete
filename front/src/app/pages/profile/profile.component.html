@@ -16,6 +16,11 @@
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Mot de passe</mat-label>
       <input matInput type="password" formControlName="password" required />
+      <mat-error *ngIf="f['password'].hasError('weakPassword')">
+        Le mot de passe doit contenir au moins 8 caractères et inclure un
+        chiffre, une lettre minuscule, une lettre majuscule et un caractère
+        spécial.
+      </mat-error>
     </mat-form-field>
 
     <button
