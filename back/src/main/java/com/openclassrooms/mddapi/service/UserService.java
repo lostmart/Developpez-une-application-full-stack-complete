@@ -58,8 +58,8 @@ public class UserService {
         UserModel user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        System.out.println("DEBUG - user ID: " + user.getId());
-        System.out.println("DEBUG - user email: " + user.getEmail());
+        // System.out.println("DEBUG - user ID: " + user.getId());
+        // System.out.println("DEBUG - user email: " + user.getEmail());
 
         return new AuthResult(token, user.getId());
     }
