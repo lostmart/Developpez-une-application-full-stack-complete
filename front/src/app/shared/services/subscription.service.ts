@@ -13,7 +13,6 @@ import { Subscription } from '../models/subscription.model';
 
 @Injectable({ providedIn: 'root' })
 export class SubscriptionService {
-  // ensure trailing slash consistency (either put it here or in environment)
   private apiUrl = `${environment.apiUrl}subscriptions`;
 
   private readonly subsSubject = new BehaviorSubject<Subscription[]>([]);
@@ -34,7 +33,7 @@ export class SubscriptionService {
     );
   }
 
-  // Optional convenience that matches your earlier usage
+  // Return the observable
   getUserSubscriptions(userId: number): Observable<Subscription[]> {
     return this.loadUserSubscriptions(userId);
   }
